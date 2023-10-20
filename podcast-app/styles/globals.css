@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Oswald", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 0;
+}
+
+.spinner {
+  width: 10vw;
+  height: 10vw;
+  position: absolute;
+  top: 40vh;
+  left: 40vw;
+}
+
+.podcast--container:hover {
+  box-shadow: 0px 0px 2px gray;
+  .podcast--image {
+    transform: scale(110%);
+    box-shadow: 7px 7px 7px gray;
+  }
+}
+
+.podcast--container {
+  display: flex;
+  align-items: flex-start;
+  width: 80vw;
+  padding: 2vw;
+  border-radius: 10px;
+}
+
+.podcast--image {
+  width: 12vw;
+  height: 12vw;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px gray;
+  pointer-events: none;
+  margin-top: 2vh;
+}
+
+p {
+  margin: 1vh;
+}
+
+.podcast--info--container {
+  margin-left: 4vw;
+  width: 100%;
+  height: 100%;
+  text-wrap: wrap;
+  pointer-events: none;
+}
+
+.podcast--title {
+  font-weight: 600;
+  font-size: 3vh;
+  color: rgb(46, 46, 46);
+  pointer-events: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.podcast--info {
+  font-weight: 400;
+  font-size: 2vh;
+  margin-left: 2vw;
+  color: rgb(72, 72, 72);
+  pointer-events: none;
+}
+
+.podcast--description {
+  font-weight: 200;
+  font-size: 2vh;
+  margin-left: 2vw;
+  font-style: italic;
+  color: rgb(129, 129, 129);
+  pointer-events: none;
+}
+
+.header {
+  height: 7vh;
+  margin-bottom: 2vh;
+  box-shadow: 0px 0px 2px gray;
+  width: 100vw;
+}
+
+.main--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailed--podcast--main--container {
+  display: flex;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+  padding: 4vw;
+  scroll-behavior: smooth;
+}
+
+.back--button {
+  position: absolute;
+  top: 1vw;
+  left: 1vw;
+}
+
+.detailed--podcast--image {
+  width: 25vw;
+  height: 25vw;
+}
+
+.back--button:hover {
+  box-shadow: 0px 0px 2px gray;
+}
+.back--button {
+  background-color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: large;
+  border-radius: 5px;
+}
