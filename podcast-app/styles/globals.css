@@ -20,8 +20,8 @@ body {
   width: 10vw;
   height: 10vw;
   position: absolute;
-  top: 40vh;
-  left: 40vw;
+  top: 45vh;
+  left: 45vw;
 }
 
 .podcast--container:hover {
@@ -122,6 +122,7 @@ p {
 .detailed--podcast--image {
   width: 25vw;
   height: 25vw;
+  margin-top: 0;
 }
 
 .back--button:hover {

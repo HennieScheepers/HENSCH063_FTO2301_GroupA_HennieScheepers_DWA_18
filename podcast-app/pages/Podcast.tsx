@@ -1,17 +1,17 @@
 import Image from "next/image";
 import spinner from "../public/icons/spinner.svg";
-import { HTMLAttributes, MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import axios from "axios";
 import DetailedPodcast from "./DetailedPodcast";
 
-const Podcast = ({
-  title,
-  genres,
-  seasons,
-  lastUpdated,
-  description,
-  image,
-  id,
+const Podcast = (props: {
+  title: string;
+  genres: number;
+  seasons: number;
+  lastUpdated: Date;
+  description: string;
+  image: string;
+  id: number;
 }) => {
   /**
    * Boolean value to determine if the main page is to be rendered or the detailed view
@@ -22,7 +22,12 @@ const Podcast = ({
    * on one of the podcast--containers. This ID is used to request data about
    * a specific show from the API
    */
-  const [showID, setID] = useState("");
+  const [showID, setID] = useState(props.id);
+  const [allGenres, setAllGenres] = useState("");
+
+  const getGenres = (newGenres: string) => {
+    setAllGenres(newGenres);
+  };
   /**
    * Keeps track of the show data. It is set within the API call everytime a user
    * clicks on one of the podcast--containers. The ID is attached to the API call
@@ -37,8 +42,12 @@ const Podcast = ({
     title: "",
     updated: "",
   });
+
+  // Handler that sets the state needed for the detailed view
   const handleShowDetailedView = () =>
     setShowDetailedView((prevValue) => !prevValue);
+
+  // Function that gets the data of the div that the user clicks on
   const getData = (event: MouseEvent) => {
     const target = event.target;
     if (target instanceof HTMLElement && target.id !== null) {
@@ -58,9 +67,25 @@ const Podcast = ({
         });
     }
   }, [showID]);
+  // Take the genres returned from the API and stringifies them into a single string for
+  // easier rendering
+  const getGenreString = (showGenres: Array<string>) => {
+    let genresString = "";
+    if (showGenres) {
+      for (let i = 0; i < showGenres.length; i++) {
+        if (i === showGenres.length - 1) {
+          genresString += `${showGenres[i]}.`;
+        } else {
+          genresString += `${showGenres[i].trim()}, `;
+        }
+      }
+      return genresString;
+    }
+    return;
+  };
   return (
     <div className="main--container">
-      {title === "" && (
+      {props.title === "" && (
         <Image
           src={spinner}
           className="spinner"
@@ -69,30 +94,36 @@ const Podcast = ({
           alt="spinner"
         />
       )}
-      {title !== "" && (
-        <div className="podcast--container" id={id} onClick={(e) => getData(e)}>
+      {props.title !== "" && (
+        <div
+          className="podcast--container"
+          id={props.id.toString()}
+          onClick={(e) => getData(e)}
+        >
           <Image
             className="podcast--image"
-            src={image}
+            src={props.image}
             width={80}
             height={80}
             alt="podcast cover image"
             priority
           />
           <div className="podcast--info--container">
-            <p className="podcast--title">{title}</p>
-            <p className="podcast--info">Genres: {genres}</p>
-            <p className="podcast--info">Seasons: {seasons}</p>
-            <p className="podcast--info">Last updated: {lastUpdated}</p>
+            <p className="podcast--title">{props.title}</p>
+            <p className="podcast--info">
+              Genres: {getGenreString(showData.genres)}
+            </p>
+            <p className="podcast--info">Seasons: {props.seasons}</p>
+            <p className="podcast--info">Last updated: {props.lastUpdated}</p>
             <p className="podcast--info">Description:</p>
-            <p className="podcast--description">{description}</p>
+            <p className="podcast--description">{props.description}</p>
           </div>
         </div>
       )}
       {showDetailedView && showData.description !== "" && (
         <DetailedPodcast
           description={showData.description}
-          genres={showData.genres}
+          genres={getGenreString(showData.genres)}
           id={showData.id}
           image={showData.image}
           seasons={showData.seasons[0]}
