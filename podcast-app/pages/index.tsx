@@ -16,7 +16,7 @@ export default function Home() {
       image: "" as string,
       seasons: 0 as number,
       title: "" as string,
-      updated: new Date() as Date,
+      updated: "" as string,
       genres: "" as string,
       description: "" as string,
     },

@@ -3,13 +3,13 @@ import back from "../public/icons/back.svg";
 
 const DetailedPodcast = (props: {
   description: string;
-  genres: Array<String>;
+  genres: string | undefined;
   id: number;
   image: string;
   seasons: number;
   title: string;
-  updated: Date;
-  setShowDetailedView: boolean;
+  updated: string;
+  setShowDetailedView: () => void;
 }) => {
   return (
     <div className="detailed--podcast--main--container">

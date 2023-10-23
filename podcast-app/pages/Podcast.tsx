@@ -6,9 +6,9 @@ import DetailedPodcast from "./DetailedPodcast";
 
 const Podcast = (props: {
   title: string;
-  genres: number;
+  genres: string;
   seasons: number;
-  lastUpdated: Date;
+  lastUpdated: string;
   description: string;
   image: string;
   id: number;
@@ -35,7 +35,7 @@ const Podcast = (props: {
    */
   const [showData, setShowData] = useState({
     description: "",
-    genres: [],
+    genres: [""] as Array<string>,
     id: 0,
     image: "",
     seasons: [],
@@ -52,13 +52,13 @@ const Podcast = (props: {
     const target = event.target;
     if (target instanceof HTMLElement && target.id !== null) {
       event.stopPropagation();
-      setID(target.id);
+      setID(parseInt(target.id));
     }
     handleShowDetailedView();
   };
 
   useEffect(() => {
-    if (showID !== "") {
+    if (showID !== undefined) {
       axios
         .get(`https://podcast-api.netlify.app/id/${showID}`)
         .then((response) => {
