@@ -22,6 +22,7 @@ body {
   position: absolute;
   top: 45vh;
   left: 45vw;
+  background-color: transparent;
 }
 
 .podcast--container:hover {

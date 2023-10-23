@@ -3,10 +3,10 @@ import spinner from "../public/icons/spinner.svg";
 import { MouseEvent, useEffect, useState } from "react";
 import axios from "axios";
 import DetailedPodcast from "./DetailedPodcast";
+import getGenreString from "./getGenreString";
 
 const Podcast = (props: {
   title: string;
-  genres: string;
   seasons: number;
   lastUpdated: string;
   description: string;
@@ -23,11 +23,6 @@ const Podcast = (props: {
    * a specific show from the API
    */
   const [showID, setID] = useState(props.id);
-  const [allGenres, setAllGenres] = useState("");
-
-  const getGenres = (newGenres: string) => {
-    setAllGenres(newGenres);
-  };
   /**
    * Keeps track of the show data. It is set within the API call everytime a user
    * clicks on one of the podcast--containers. The ID is attached to the API call
@@ -35,14 +30,16 @@ const Podcast = (props: {
    */
   const [showData, setShowData] = useState({
     description: "",
-    genres: [""] as Array<string>,
+    genres: [],
     id: 0,
     image: "",
     seasons: [],
     title: "",
     updated: "",
   });
+  console.log(showData.genres);
 
+  const [genreString, setGenreString] = useState("");
   // Handler that sets the state needed for the detailed view
   const handleShowDetailedView = () =>
     setShowDetailedView((prevValue) => !prevValue);
@@ -64,28 +61,25 @@ const Podcast = (props: {
         .then((response) => {
           setShowData(response.data);
           console.log(response.data);
-        });
+        })
+        .catch((error) =>
+          console.error(
+            "Something went wrong when tryin to call https://podcast-api.netlify.app/id/<ID>. ",
+            error
+          )
+        );
     }
   }, [showID]);
+
+  useEffect(() => {
+    setGenreString(getGenreString(showData.genres));
+  });
   // Take the genres returned from the API and stringifies them into a single string for
   // easier rendering
-  const getGenreString = (showGenres: Array<string>) => {
-    let genresString = "";
-    if (showGenres) {
-      for (let i = 0; i < showGenres.length; i++) {
-        if (i === showGenres.length - 1) {
-          genresString += `${showGenres[i]}.`;
-        } else {
-          genresString += `${showGenres[i].trim()}, `;
-        }
-      }
-      return genresString;
-    }
-    return;
-  };
+
   return (
     <div className="main--container">
-      {props.title === "" && (
+      {genreString === "" && (
         <Image
           src={spinner}
           className="spinner"
@@ -94,7 +88,7 @@ const Podcast = (props: {
           alt="spinner"
         />
       )}
-      {props.title !== "" && (
+      {genreString !== "" && (
         <div
           className="podcast--container"
           id={props.id.toString()}
@@ -110,9 +104,7 @@ const Podcast = (props: {
           />
           <div className="podcast--info--container">
             <p className="podcast--title">{props.title}</p>
-            <p className="podcast--info">
-              Genres: {getGenreString(showData.genres)}
-            </p>
+            <p className="podcast--info">Genres: {genreString}</p>
             <p className="podcast--info">Seasons: {props.seasons}</p>
             <p className="podcast--info">Last updated: {props.lastUpdated}</p>
             <p className="podcast--info">Description:</p>
@@ -123,7 +115,7 @@ const Podcast = (props: {
       {showDetailedView && showData.description !== "" && (
         <DetailedPodcast
           description={showData.description}
-          genres={getGenreString(showData.genres)}
+          genres={genreString}
           id={showData.id}
           image={showData.image}
           seasons={showData.seasons[0]}

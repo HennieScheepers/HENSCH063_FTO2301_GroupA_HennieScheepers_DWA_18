@@ -22,8 +22,6 @@ export default function Home() {
     },
   ]);
 
-  const [genreString, setGenreString] = useState("");
-
   /**
    * Axios call to API to fetch necessary data and populate the array with the response
    */
@@ -33,7 +31,12 @@ export default function Home() {
       .then((res) => {
         setApiData(res.data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) =>
+        console.error(
+          "Something went wrong when calling https://podcast-api.netlify.app/shows. ",
+          error
+        )
+      );
   }, []);
 
   const podcastElements = apiData.map((podcast) => {
@@ -41,7 +44,6 @@ export default function Home() {
       <Podcast
         key={podcast.id}
         title={podcast.title}
-        genres={genreString}
         seasons={podcast.seasons}
         lastUpdated={podcast.updated}
         description={podcast.description}
