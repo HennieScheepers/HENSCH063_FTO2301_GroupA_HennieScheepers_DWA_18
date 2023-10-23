@@ -1,10 +1,8 @@
-import { Inter } from "next/font/google";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
-import spinner from "../public/icons/spinner.svg";
 import Podcast from "./Podcast";
 import Header from "./Header";
+import Spinner from "./Spinner";
 
 export default function Home() {
   /**
@@ -56,15 +54,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      {apiData[1] === undefined && (
-        <Image
-          className="spinner"
-          src={spinner}
-          width={0}
-          height={0}
-          alt="spinner"
-        ></Image>
-      )}
+      {apiData[1] === undefined && <Spinner />}
       {apiData[1] !== undefined && podcastElements}
     </div>
   );

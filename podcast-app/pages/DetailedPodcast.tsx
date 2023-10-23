@@ -21,8 +21,9 @@ const DetailedPodcast = (props: {
         className="podcast--image detailed--podcast--image"
         src={props.image}
         alt="podcast cover image"
-        height={500}
-        width={500}
+        height={200}
+        width={200}
+        priority
       />
       <div className="podcast--info--container">
         <p className="podcast--title">{props.title}</p>

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import spinner from "../public/icons/spinner.svg";
 import { MouseEvent, useEffect, useState } from "react";
 import axios from "axios";
 import DetailedPodcast from "./DetailedPodcast";
 import getGenreString from "./getGenreString";
+import Spinner from "./Spinner";
 
 const Podcast = (props: {
   title: string;
@@ -37,7 +37,6 @@ const Podcast = (props: {
     title: "",
     updated: "",
   });
-  console.log(showData.genres);
 
   const [genreString, setGenreString] = useState("");
   // Handler that sets the state needed for the detailed view
@@ -60,7 +59,6 @@ const Podcast = (props: {
         .get(`https://podcast-api.netlify.app/id/${showID}`)
         .then((response) => {
           setShowData(response.data);
-          console.log(response.data);
         })
         .catch((error) =>
           console.error(
@@ -73,21 +71,13 @@ const Podcast = (props: {
 
   useEffect(() => {
     setGenreString(getGenreString(showData.genres));
-  });
+  }, [showData.genres]);
   // Take the genres returned from the API and stringifies them into a single string for
   // easier rendering
 
   return (
     <div className="main--container">
-      {genreString === "" && (
-        <Image
-          src={spinner}
-          className="spinner"
-          width={0}
-          height={0}
-          alt="spinner"
-        />
-      )}
+      {genreString === "" && <Spinner />}
       {genreString !== "" && (
         <div
           className="podcast--container"
@@ -112,7 +102,7 @@ const Podcast = (props: {
           </div>
         </div>
       )}
-      {showDetailedView && showData.description !== "" && (
+      {showDetailedView && showData.image !== "" && (
         <DetailedPodcast
           description={showData.description}
           genres={genreString}
@@ -124,6 +114,7 @@ const Podcast = (props: {
           setShowDetailedView={handleShowDetailedView}
         />
       )}
+      {showDetailedView && showData.image === "" && <Spinner />}
     </div>
   );
 };
