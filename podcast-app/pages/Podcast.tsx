@@ -2,7 +2,7 @@ import Image from "next/image";
 import { MouseEvent, useEffect, useState } from "react";
 import axios from "axios";
 import DetailedPodcast from "./DetailedPodcast";
-import getGenreString from "./getGenreString";
+import getGenreString from "./helpers/getGenreString";
 import Spinner from "./Spinner";
 
 const Podcast = (props: {

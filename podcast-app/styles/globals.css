@@ -26,7 +26,6 @@ body {
 }
 
 .podcast--container:hover {
-  box-shadow: 0px 0px 2px gray;
   .podcast--image {
     transform: scale(110%);
     box-shadow: 7px 7px 7px gray;
@@ -89,10 +88,52 @@ p {
 }
 
 .header {
-  height: 7vh;
-  margin-bottom: 2vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 0px 0px 2px gray;
   width: 100vw;
+}
+
+.header--text {
+  padding-left: 3vw;
+}
+
+.header--button--container {
+  display: flex;
+  height: 100%;
+  width: 18%;
+  justify-content: space-between;
+  padding-right: 3vw;
+  align-items: center;
+}
+
+.search--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary--button:hover {
+  transform: scale(110%);
+}
+
+.primary--button {
+  height: 5vh;
+  width: auto;
+  background-color: transparent;
+  border-radius: 5px;
+  border-color: white;
+  border-image: none;
+  border-style: none;
+}
+
+.search--input {
+  height: 3vh;
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: 0px 0px 2px gray;
+  width: 12vw;
 }
 
 .main--container {
@@ -112,6 +153,9 @@ p {
   background-color: white;
   padding: 4vw;
   scroll-behavior: smooth;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .back--button {
@@ -129,6 +173,9 @@ p {
 .back--button:hover {
   box-shadow: 0px 0px 2px gray;
 }
+.back--button:active {
+  transform: scale(90%);
+}
 .back--button {
   background-color: white;
   border: none;
@@ -138,4 +185,82 @@ p {
   font-weight: 500;
   font-size: large;
   border-radius: 5px;
+}
+
+.image--spinner {
+  width: 1vw;
+  height: 1vw;
+  box-shadow: none;
+}
+
+.sort--container {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-right: 3vw;
+}
+
+.sort--select {
+  width: 6vw;
+  height: 2vw;
+  border-radius: 5px;
+}
+
+.sort--text {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  padding-right: 0.2vw;
+}
+
+@media screen and (max-width: 500px) {
+  .spinner {
+    width: 20vw;
+    height: 20vh;
+    top: 40vh;
+    left: 40vw;
+  }
+
+  .podcast--container {
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    border-radius: 10px;
+  }
+
+  .podcast--image {
+    width: 35vw;
+    height: 35vw;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
+    pointer-events: none;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+
+  .detailed--podcast--main--container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 90vw;
+    padding: 0;
+    padding-top: 5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .detailed--podcast--main--container > .podcast--info--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .back--button {
+    position: absolute;
+    top: 2vh;
+    left: 2vh;
+  }
 }
