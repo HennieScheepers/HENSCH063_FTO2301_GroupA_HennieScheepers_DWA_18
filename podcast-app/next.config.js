@@ -4,8 +4,8 @@ const nextConfig = {
 };
 
 module.exports = {
-  nextConfig,
+  ...nextConfig,
   images: {
-    domains: ["content.production.cdn.art19.com"],
+    domains: ["content.production.cdn.art19.com", "res.cloudinary.com"],
   },
 };

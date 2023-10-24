@@ -9,7 +9,7 @@ const Sort = (props: { setSort: Function; sort: "" }) => {
   };
   return (
     <div className="sort--container">
-      <p id="sort" className="sort--text">
+      <p id="sort" className="sort--text ">
         Sort
       </p>
       <Select

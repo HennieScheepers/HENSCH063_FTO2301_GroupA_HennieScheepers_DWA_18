@@ -1,9 +1,10 @@
-import spinner from "../public/icons/spinner.svg";
+import spinner from "../../public/icons/spinner.svg";
 import Image from "next/image";
 
 const Spinner = () => {
   return (
     <Image
+      priority
       className="spinner"
       src={spinner}
       width={0}

@@ -72,11 +72,34 @@ p {
 }
 
 .podcast--info {
+  display: flex;
+  justify-content: space-between;
   font-weight: 400;
   font-size: 2vh;
   margin-left: 2vw;
   color: rgb(72, 72, 72);
   pointer-events: none;
+}
+
+.secondary--button:hover {
+  transform: scale(110%);
+}
+
+.favorite--filled {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(85%) saturate(3828%)
+    hue-rotate(325deg) brightness(118%) contrast(109%);
+}
+
+.secondary--button {
+  background-color: transparent;
+  border-style: none;
+  pointer-events: all;
+}
+
+.icon--container {
+  display: flex;
+  justify-content: space-between;
+  width: 5vw;
 }
 
 .podcast--description {
@@ -86,6 +109,10 @@ p {
   font-style: italic;
   color: rgb(129, 129, 129);
   pointer-events: none;
+  /* display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden; */
 }
 
 .header {
@@ -147,8 +174,8 @@ p {
   display: flex;
   position: fixed;
   text-wrap: wrap;
-  width: 100vw;
-  height: 100vh;
+  width: 93vw;
+  height: 93vh;
   top: 0;
   left: 0;
   background-color: white;
@@ -156,14 +183,24 @@ p {
   justify-content: center;
   align-items: flex-start;
   padding: 3.5vw;
-  overflow-x: scroll;
-  overflow-y: scroll;
+}
+
+.podcast--details {
+  overflow-y: auto;
+  height: 43vh;
+}
+
+.detailed--image--container {
+  display: flex;
+  flex-direction: column;
 }
 
 .detailed--info--container {
-  padding: 5vw;
+  padding: 0;
   padding-top: 0;
   pointer-events: all;
+  height: 100vh;
+  width: 80vw;
 }
 .back--button {
   position: absolute;
@@ -223,12 +260,21 @@ p {
 .season--container {
   display: flex;
   flex-direction: column;
-  margin-top: 5vh;
+  margin-top: 3vh;
   box-shadow: 0px 0px 2px gray;
   padding: 2vw;
   border-radius: 5px;
+  overflow-y: auto;
+  height: 38vh;
 }
 
+.season--image {
+  margin: 2vh;
+  margin-left: 2vw;
+  width: 6vw;
+  height: 6vw;
+  border-radius: 5px;
+}
 .select--container {
   display: flex;
   justify-content: center;
@@ -246,6 +292,136 @@ p {
 
 .season--text {
   font-size: large;
+}
+
+.num--of--episodes {
+  padding-left: 1.5vw;
+}
+
+.episode--text {
+  padding-left: 1vw;
+}
+
+.main--profile--container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 2;
+  display: flex;
+  padding: 4vw;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.show {
+  width: 20vw;
+  text-align: left;
+  margin-left: auto;
+}
+
+.favorite {
+  width: 75%;
+  text-align: le;
+  display: flex;
+  align-items: center;
+}
+
+.basic--user--details {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio--player {
+  position: absolute;
+  bottom: 8vh;
+  width: 28vw;
+  left: 0;
+  margin-left: 3vw;
+  border-radius: 0;
+}
+
+.login--main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 15vw;
+}
+
+.login--container {
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.login--details {
+  margin: 0;
+  padding: 0;
+  font-family: "Oswald", sans-serif;
+}
+
+.button--container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login--button,
+.signup--button,
+.login--input {
+  width: 5vw;
+  height: 3.5vh;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.login--button:hover,
+.signup--button:hover {
+  background-color: rgb(93, 141, 245);
+  color: white;
+}
+
+.login--button:active,
+.signup--button:active {
+  transform: scale(110%);
+}
+.login--button {
+  box-shadow: 0px 0px 1px gray;
+  color: rgb(93, 141, 245);
+}
+
+.signup--button {
+  box-shadow: 0px 0px 1px gray;
+  color: rgb(93, 141, 245);
+}
+
+.login--input {
+  box-shadow: 0px 0px 1px gray;
+  width: 10vw;
+  padding-left: 0.5vw;
+}
+
+.login--input::placeholder {
+  color: rgb(181, 181, 181);
+  font-style: italic;
+}
+
+.error {
+  color: rgb(252, 89, 89);
+  font-size: 1.5vh;
+  margin: 0;
+  margin-top: 2vh;
+  font-style: normal;
+  text-align: center;
 }
 
 @media screen and (max-width: 500px) {
@@ -278,11 +454,60 @@ p {
     justify-content: center;
     align-items: center;
     margin: 0;
-    width: 90vw;
     padding: 0;
-    padding-top: 5vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    height: 95%;
+    width: 100%;
+    padding-bottom: 10vh;
+    overflow-y: scroll;
+  }
+
+  .detailed--podcast--main--container > .podcast--image {
+    margin-top: 30vh;
+  }
+
+  .podcast--details {
+    overflow-y: hidden;
+    height: auto;
+  }
+
+  .podcast--info,
+  .episode--text {
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    font-weight: 400;
+    font-size: 2vh;
+    margin-left: 2vw;
+    color: rgb(72, 72, 72);
+    pointer-events: none;
+  }
+
+  .podcast--description {
+    height: auto;
+  }
+
+  .podcast--info--container {
+    padding-top: 10vh;
+    width: 100vw;
+    height: 100%;
+  }
+  .podcast--info--container > .podcast--details {
+    height: 100%;
+  }
+
+  .season--container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    padding-bottom: 3vh;
+    box-shadow: 0px 0px 2px gray;
+    padding: 5vw;
+    border-radius: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 5vh;
+    width: 90vw;
+    height: 100%;
   }
 
   .detailed--podcast--main--container > .podcast--info--container {
@@ -298,5 +523,24 @@ p {
     position: absolute;
     top: 2vh;
     left: 2vh;
+  }
+
+  .login--main {
+    width: 80vw;
+  }
+
+  .login--button,
+  .signup--button {
+    width: 20vw;
+    height: 5vh;
+  }
+
+  .login--input {
+    width: 60vw;
+    height: 5vh;
+  }
+
+  .login--container {
+    margin-bottom: 5vh;
   }
 }

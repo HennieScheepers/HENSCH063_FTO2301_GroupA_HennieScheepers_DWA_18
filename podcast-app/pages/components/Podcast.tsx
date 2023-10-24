@@ -1,22 +1,23 @@
 import Image from "next/image";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import DetailedPodcast from "./DetailedPodcast";
-import getGenreString from "./helpers/getGenreString";
+import getGenreString from "../helpers/getGenreString";
 import Spinner from "./Spinner";
 
 const Podcast = (props: {
   title: string;
-  seasons: [
-    {
-      season: number;
+  seasons: {
+    season: number;
+    title: string;
+    image: string;
+    episodes: {
+      description: string;
+      episode: number;
+      file: string;
       title: string;
-      image: string;
-      episode: [
-        { description: string; episode: number; file: string; title: string }
-      ];
-    }
-  ];
+    }[];
+  }[];
   lastUpdated: string;
   description: string;
   image: string;
@@ -42,10 +43,19 @@ const Podcast = (props: {
     genres: [],
     id: 0,
     image: "",
-    seasons: [],
+    seasons: [
+      {
+        season: 0,
+        title: "",
+        image: "",
+        episodes: [{ description: "", episode: 0, file: "", title: "" }],
+      },
+    ],
     title: "",
     updated: "",
   });
+
+  console.log(showData.seasons);
 
   const [genreString, setGenreString] = useState("");
   // Handler that sets the state needed for the detailed view
@@ -104,7 +114,9 @@ const Podcast = (props: {
           <div className="podcast--info--container">
             <p className="podcast--title">{props.title}</p>
             <p className="podcast--info">Genres: {genreString}</p>
-            <p className="podcast--info">Seasons: {props.seasons}</p>
+            <p className="podcast--info">
+              Seasons: {props.seasons as ReactNode}
+            </p>
             <p className="podcast--info">Last updated: {props.lastUpdated}</p>
             <p className="podcast--info">Description:</p>
             <p className="podcast--description">{props.description}</p>
