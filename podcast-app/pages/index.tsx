@@ -5,7 +5,6 @@ import Header from "./Header";
 import Spinner from "./Spinner";
 import createUpdatedDate from "./helpers/createUpdatedDate";
 import Sort from "./Sort";
-import { title } from "process";
 
 export default function Home() {
   /**
@@ -64,7 +63,7 @@ export default function Home() {
     }
   };
   const sortedData = handleDataSort();
-  console.log(sortedData);
+
   // Create an array which holds the podcasts with the matching genres/ titles
   const filteredData = sortedData.filter((podcast) => {
     if (podcast.title.toLowerCase().includes(searchFilter.toLowerCase())) {
@@ -95,7 +94,7 @@ export default function Home() {
   return (
     <div>
       <Header setSearchFilter={setSearchFilter} searchFilter={searchFilter} />
-      <Sort setSort={setSort} />
+      <Sort setSort={setSort} sort={sort as ""} />
       {apiData[1] === undefined && <Spinner />}
       {apiData[1] !== undefined && podcastElements}
     </div>

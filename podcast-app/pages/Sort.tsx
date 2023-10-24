@@ -1,9 +1,7 @@
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-
+import Select, { SelectChangeEvent, SelectProps } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { ChangeEvent } from "react";
-const Sort = (props: { setSort: Function }) => {
+
+const Sort = (props: { setSort: Function; sort: "" }) => {
   const handleChange = (event: SelectChangeEvent<"">) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
@@ -17,7 +15,7 @@ const Sort = (props: { setSort: Function }) => {
       <Select
         labelId="sort"
         className="sort--select"
-        value={""}
+        value={props.sort}
         onChange={handleChange}
       >
         <MenuItem className="sort--option" value={"a-z"}>

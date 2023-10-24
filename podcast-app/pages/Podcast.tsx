@@ -7,7 +7,16 @@ import Spinner from "./Spinner";
 
 const Podcast = (props: {
   title: string;
-  seasons: number;
+  seasons: [
+    {
+      season: number;
+      title: string;
+      image: string;
+      episode: [
+        { description: string; episode: number; file: string; title: string }
+      ];
+    }
+  ];
   lastUpdated: string;
   description: string;
   image: string;
@@ -62,7 +71,7 @@ const Podcast = (props: {
         })
         .catch((error) =>
           console.error(
-            "Something went wrong when tryin to call https://podcast-api.netlify.app/id/<ID>. ",
+            "Something went wrong when trying to call https://podcast-api.netlify.app/id/<ID>. ",
             error
           )
         );
@@ -108,7 +117,7 @@ const Podcast = (props: {
           genres={genreString}
           id={showData.id}
           image={showData.image}
-          seasons={showData.seasons[0]}
+          seasons={showData.seasons}
           title={showData.title}
           updated={showData.updated}
           setShowDetailedView={handleShowDetailedView}

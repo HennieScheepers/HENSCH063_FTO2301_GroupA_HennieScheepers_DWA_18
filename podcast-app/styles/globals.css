@@ -59,6 +59,7 @@ p {
   height: 100%;
   text-wrap: wrap;
   pointer-events: none;
+  padding: 2vw;
 }
 
 .podcast--title {
@@ -145,19 +146,25 @@ p {
 .detailed--podcast--main--container {
   display: flex;
   position: fixed;
+  text-wrap: wrap;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 1;
   background-color: white;
-  padding: 4vw;
   scroll-behavior: smooth;
   justify-content: center;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  align-items: flex-start;
+  padding: 3.5vw;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
+.detailed--info--container {
+  padding: 5vw;
+  padding-top: 0;
+  pointer-events: all;
+}
 .back--button {
   position: absolute;
   top: 1vw;
@@ -211,6 +218,34 @@ p {
   font-family: "Oswald", sans-serif;
   font-weight: 400;
   padding-right: 0.2vw;
+}
+
+.season--container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  box-shadow: 0px 0px 2px gray;
+  padding: 2vw;
+  border-radius: 5px;
+}
+
+.select--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  z-index: 1;
+}
+
+.sort--text {
+  margin-left: auto;
+}
+.season--select {
+  height: 4vh;
+}
+
+.season--text {
+  font-size: large;
 }
 
 @media screen and (max-width: 500px) {
