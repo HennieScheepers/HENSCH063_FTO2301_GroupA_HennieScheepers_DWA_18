@@ -1,5 +1,8 @@
 import Image from "next/image";
 import back from "../public/icons/back.svg";
+import spinner from "../public/icons/spinner.svg";
+import { useState } from "react";
+import Season from "./Season";
 
 const DetailedPodcast = (props: {
   description: string;
@@ -11,20 +14,26 @@ const DetailedPodcast = (props: {
   updated: string;
   setShowDetailedView: () => void;
 }) => {
+  const [isImageLoaded, setImageLoaded] = useState(false);
+  console.log(props.seasons);
   return (
     <div className="detailed--podcast--main--container">
       <button className="back--button" onClick={props.setShowDetailedView}>
         <Image src={back} alt="back button" width={30} height={30} />
         Back
       </button>
+
       <Image
-        className="podcast--image detailed--podcast--image"
-        src={props.image}
+        className={
+          isImageLoaded ? "podcast--image detailed--podcast--image" : ""
+        }
+        src={isImageLoaded ? props.image : spinner}
         alt="podcast cover image"
-        height={200}
-        width={200}
-        priority
+        height={500}
+        width={500}
+        onLoadingComplete={() => setImageLoaded(true)}
       />
+
       <div className="podcast--info--container">
         <p className="podcast--title">{props.title}</p>
         <p className="podcast--info">Genres: {props.genres}</p>

@@ -1,7 +1,51 @@
-const Header = () => {
+import { ChangeEvent, useState } from "react";
+import accountIcon from "../public/icons/accountIcon.svg";
+import searchIcon from "../public/icons/searchIcon.svg";
+import Image from "next/image";
+
+const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
+  // Handles the onChange event when the user types into the search bar.
+  // This onChange event sets the searchFilter found in index.js
+  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    const targetValue = target.value;
+    props.setSearchFilter(targetValue);
+  };
+
+  // boolean value that determines if userProfile is to be displayed
+  const [showUserProfile, setShowUserProfile] = useState(false);
+
   return (
     <div className="header">
-      <h3>Header</h3>
+      <h3 className="header--text">Header</h3>
+      <div className="header--button--container">
+        <div className="search--container">
+          <input
+            className="search--input"
+            type="text"
+            name="searchFilter"
+            value={props.searchFilter}
+            onChange={handleFilterChange}
+          />
+          <button className="primary--button">
+            <Image
+              src={searchIcon}
+              alt="search icon"
+              height={20}
+              width={20}
+            ></Image>
+          </button>
+        </div>
+
+        <button className="primary--button">
+          <Image
+            src={accountIcon}
+            alt="search icon"
+            height={20}
+            width={20}
+          ></Image>
+        </button>
+      </div>
     </div>
   );
 };
