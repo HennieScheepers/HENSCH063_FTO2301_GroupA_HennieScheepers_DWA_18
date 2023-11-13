@@ -6,7 +6,6 @@ import icon from "../../public/icons/deleteIcon.svg";
 
 const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
   const globalFavorites = useContext(FavoritesContext).globalFavorites;
-  console.log(globalFavorites);
 
   return (
     <div className="main--profile--container">
