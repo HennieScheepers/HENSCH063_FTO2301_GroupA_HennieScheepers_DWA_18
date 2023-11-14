@@ -2,11 +2,9 @@ import Image from "next/image";
 import { MouseEvent, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import DetailedPodcast from "./DetailedPodcast";
-<<<<<<< HEAD:podcast-app/pages/components/Podcast.tsx
+
 import getGenreString from "../helpers/getGenreString";
-=======
-import getGenreString from "./helpers/getGenreString";
->>>>>>> c9214696c0c9a8d194fc39c75e7d7965ef497992:podcast-app/pages/Podcast.tsx
+
 import Spinner from "./Spinner";
 
 const Podcast = (props: {

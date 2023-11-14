@@ -181,13 +181,8 @@ p {
   background-color: white;
   scroll-behavior: smooth;
   justify-content: center;
-<<<<<<< HEAD
   align-items: flex-start;
   padding: 3.5vw;
-=======
-  overflow-x: hidden;
-  overflow-y: hidden;
->>>>>>> c9214696c0c9a8d194fc39c75e7d7965ef497992
 }
 
 .podcast--details {
@@ -243,10 +238,7 @@ p {
 }
 
 .sort--container {
-<<<<<<< HEAD
   margin-top: 2vh;
-=======
->>>>>>> c9214696c0c9a8d194fc39c75e7d7965ef497992
   display: flex;
   justify-content: right;
   align-items: center;
@@ -265,7 +257,6 @@ p {
   padding-right: 0.2vw;
 }
 
-<<<<<<< HEAD
 .season--container {
   display: flex;
   flex-direction: column;
@@ -433,8 +424,6 @@ p {
   text-align: center;
 }
 
-=======
->>>>>>> c9214696c0c9a8d194fc39c75e7d7965ef497992
 @media screen and (max-width: 500px) {
   .spinner {
     width: 20vw;
@@ -465,7 +454,6 @@ p {
     justify-content: center;
     align-items: center;
     margin: 0;
-<<<<<<< HEAD
     padding: 0;
     height: 95%;
     width: 100%;
@@ -520,13 +508,6 @@ p {
     margin-top: 5vh;
     width: 90vw;
     height: 100%;
-=======
-    width: 90vw;
-    padding: 0;
-    padding-top: 5vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
->>>>>>> c9214696c0c9a8d194fc39c75e7d7965ef497992
   }
 
   .detailed--podcast--main--container > .podcast--info--container {
@@ -543,7 +524,6 @@ p {
     top: 2vh;
     left: 2vh;
   }
-<<<<<<< HEAD
 
   .login--main {
     width: 80vw;
@@ -563,6 +543,4 @@ p {
   .login--container {
     margin-bottom: 5vh;
   }
-=======
->>>>>>> c9214696c0c9a8d194fc39c75e7d7965ef497992
 }
