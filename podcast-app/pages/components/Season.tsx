@@ -32,7 +32,7 @@ const Season = (props: {
     props.seasons[season - 1].image
   );
 
-  const { globalUserName, setGlobalUsername } = useContext(UserNameContext);
+  const { globalUserName } = useContext(UserNameContext);
   const { globalFavorites, setGlobalFavorites } = useContext(FavoritesContext);
 
   const [favorites, setFavorites] = useState([{}]);
@@ -55,7 +55,6 @@ const Season = (props: {
           }
         }
         setFavorites(episodesArray);
-        console.log(episodesArray);
       }
     };
 
@@ -93,6 +92,7 @@ const Season = (props: {
       />
     );
   });
+  1;
 
   // Event handler that handles the onChange event for the Select. This determines
   // the season selected by the user

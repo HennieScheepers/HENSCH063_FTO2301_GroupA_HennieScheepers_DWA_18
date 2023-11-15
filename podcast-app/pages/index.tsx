@@ -31,7 +31,6 @@ export const FavoritesContext = createContext<IFavorites>({
 
 export default function Home() {
   const [globalUserName, setGlobalUsername] = useState("");
-  console.log(globalUserName);
   const [globalFavorites, setGlobalFavorites] = useState([]);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const displayComponent = isLoggedIn ? (

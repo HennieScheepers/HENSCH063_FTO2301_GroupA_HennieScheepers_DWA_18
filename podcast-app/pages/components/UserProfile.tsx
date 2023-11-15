@@ -1,11 +1,20 @@
 import Image from "next/image";
 import back from "../../public/icons/back.svg";
-import { MouseEventHandler, useContext } from "react";
+import { MouseEventHandler, useContext, useEffect } from "react";
 import { FavoritesContext } from "..";
-import icon from "../../public/icons/deleteIcon.svg";
+import Favorite from "./Favorite";
 
 const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
-  const globalFavorites = useContext(FavoritesContext).globalFavorites;
+  const { globalFavorites } = useContext(FavoritesContext);
+  const favoritesElements = globalFavorites.map((favorite, index) => (
+    <Favorite
+      key={index}
+      episode={favorite.episodes}
+      show={favorite.show}
+      username={favorite.username}
+    />
+  ));
+  useEffect(() => {}, [globalFavorites]);
 
   return (
     <div className="main--profile--container">
@@ -16,7 +25,18 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       <div className="favorites">
         <h3 className="podcast--title">My Favorites</h3>
       </div>
-      {/* {favoritesElements} */}
+      <div className="favorites--table">
+        <div className="table--row table--heading podcast--info sticky">
+          <div className="table--episode">Episode</div>
+          <div className="table--show">Show</div>
+          <div className="table--button">Actions</div>
+        </div>
+        {favoritesElements[0] ? (
+          favoritesElements
+        ) : (
+          <h3 className="podcast--info">No favorirtes added.</h3>
+        )}
+      </div>
     </div>
   );
 };

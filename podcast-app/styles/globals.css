@@ -54,7 +54,6 @@ p {
 }
 
 .podcast--info--container {
-  margin-left: 4vw;
   width: 100%;
   height: 100%;
   text-wrap: wrap;
@@ -143,7 +142,7 @@ p {
 }
 
 .primary--button:hover {
-  transform: scale(110%);
+  transform: scale(120%);
 }
 
 .primary--button {
@@ -307,7 +306,7 @@ p {
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: white;
@@ -392,7 +391,7 @@ p {
 
 .login--button:active,
 .signup--button:active {
-  transform: scale(110%);
+  transform: scale(120%);
 }
 .login--button {
   box-shadow: 0px 0px 1px gray;
@@ -424,6 +423,60 @@ p {
   text-align: center;
 }
 
+.favorites--table {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 90vw;
+  height: 80vh;
+  position: static;
+}
+
+.table--row {
+  display: flex;
+  width: 75vw;
+  align-items: center;
+  margin-bottom: 1vh;
+}
+
+.table--heading {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.table--episode {
+  display: flex;
+  width: 30vw;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.table--show {
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  width: 35vw;
+  margin-left: auto;
+}
+
+.table--button:hover {
+  transform: scale(120%);
+  filter: invert(54%) sepia(24%) saturate(1117%) hue-rotate(313deg)
+    brightness(96%) contrast(110%);
+}
+
+.table--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2vw;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
 @media screen and (max-width: 500px) {
   .spinner {
     width: 20vw;

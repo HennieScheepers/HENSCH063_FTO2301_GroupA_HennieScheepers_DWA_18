@@ -57,8 +57,6 @@ const Podcast = (props: {
     updated: "",
   });
 
-  console.log(showData.seasons);
-
   const [genreString, setGenreString] = useState("");
   // Handler that sets the state needed for the detailed view
   const handleShowDetailedView = () =>

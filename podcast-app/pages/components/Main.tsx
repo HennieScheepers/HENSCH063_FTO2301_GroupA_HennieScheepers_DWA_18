@@ -29,13 +29,14 @@ const Main = () => {
     {
       id: "" as string,
       image: "" as string,
-      seasons: 
-        [{
+      seasons: [
+        {
           season: 0,
           title: "",
           image: "",
           episode: [{ description: " ", episode: 0, file: " ", title: " " }],
-        }],
+        },
+      ],
       title: "" as string,
       updated: "" as string,
       genres: "" as string,
@@ -81,7 +82,6 @@ const Main = () => {
 
       if (data) {
         setGlobalFavorites(data);
-        console.log("data set");
       }
     };
 

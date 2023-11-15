@@ -28,26 +28,18 @@ const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
             type="text"
             name="searchFilter"
             value={props.searchFilter}
+            placeholder="Search a podcast here.."
             onChange={handleFilterChange}
           />
-          <button className="primary--button">
+          <button className="primary--button" onClick={handleProfileClick}>
             <Image
-              src={searchIcon}
+              src={accountIcon}
               alt="search icon"
               height={20}
               width={20}
             ></Image>
           </button>
         </div>
-
-        <button className="primary--button" onClick={handleProfileClick}>
-          <Image
-            src={accountIcon}
-            alt="search icon"
-            height={20}
-            width={20}
-          ></Image>
-        </button>
       </div>
       {showUserProfile && (
         <UserProfile setShowProfileView={handleProfileClick} />

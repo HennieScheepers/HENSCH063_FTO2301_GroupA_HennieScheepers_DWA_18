@@ -1,10 +1,11 @@
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserNameContext } from "../index";
 import supabase from "../config/supabaseClient";
 import { FavoritesContext } from "../index";
+import { RerenderContext } from "./Main";
 
 const Episode = (props: {
   title: string;
@@ -22,18 +23,23 @@ const Episode = (props: {
 
   // Global state for the favorites
   const { globalFavorites, setGlobalFavorites } = useContext(FavoritesContext);
-  console.log(globalFavorites);
 
-  let initialFavorite = false;
-  for (let i = 0; i < globalFavorites.length; i++) {
-    if (
-      globalFavorites[i].show === props.showName &&
-      globalFavorites[i].episodes === props.title
-    ) {
-      initialFavorite = true;
-    }
-  }
-  const [isFavorited, setIsFavorited] = useState(initialFavorite);
+  const { rerender, setRerender } = useContext(RerenderContext);
+
+  // let initialFavorite = false;
+  // for (let i = 0; i < globalFavorites.length; i++) {
+  //   if (
+  //     globalFavorites[i].show === props.showName &&
+  //     globalFavorites[i].episodes === props.title &&
+  //     globalFavorites[i].season === props.seasonNumber
+  //   ) {
+  //     initialFavorite = true;
+  //   }
+  // }
+
+  // console.log(`${props.title} initial Favorite : ${initialFavorite}`);
+  const [isFavorited, setIsFavorited] = useState(props.isFavorited);
+
   const audio = new Audio(props.file);
 
   const handlePlayClick = () => {
@@ -57,7 +63,6 @@ const Episode = (props: {
 
     if (data) {
       const newGlobalFavorites = [...globalFavorites];
-      console.log(newGlobalFavorites);
       for (let i = 0; i < newGlobalFavorites.length; i++) {
         const element = {
           username: globalUserName,
@@ -103,18 +108,20 @@ const Episode = (props: {
     setGlobalFavorites(newGlobalFavorites);
   };
 
-  const handleRemoveFromFavorites = async () => {
+  useEffect(() => {}, [props.isFavorited]);
+
+  const handleRemoveFromFavorites = () => {
     removeFromFavorites();
     setIsFavorited(false);
-    console.log(globalFavorites);
+    setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
     console.log("removed");
   };
 
-  const handleFavoriteClick = async () => {
+  const handleFavoriteClick = () => {
     addToFavorites();
     setIsFavorited(true);
-    console.log(globalFavorites);
     console.log("added");
+    setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
   };
   return (
     <div>
@@ -127,10 +134,12 @@ const Episode = (props: {
           <button
             className="secondary--button"
             onClick={
-              isFavorited ? handleRemoveFromFavorites : handleFavoriteClick
+              props.isFavorited
+                ? handleRemoveFromFavorites
+                : handleFavoriteClick
             }
           >
-            {isFavorited ? (
+            {props.isFavorited ? (
               <FavoriteIcon className="favorite--filled" />
             ) : (
               <FavoriteBorderIcon />
