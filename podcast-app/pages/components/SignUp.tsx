@@ -112,7 +112,7 @@ const SignUp = (props: {
         </label>
         <input
           className="login--input"
-          type="text"
+          type="password"
           name="password"
           id="password"
           value={password}
@@ -126,7 +126,7 @@ const SignUp = (props: {
         </label>
         <input
           className="login--input"
-          type="text"
+          type="password"
           name="confirm--password"
           id="confirm--password"
           value={confirmPassword}

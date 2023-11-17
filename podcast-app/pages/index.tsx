@@ -18,6 +18,7 @@ interface IFavorite {
   id: number;
   season: number;
   username: string;
+  dateAdded: Date;
 }
 
 interface IFavorites {

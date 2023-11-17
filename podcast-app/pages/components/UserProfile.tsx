@@ -1,12 +1,43 @@
 import Image from "next/image";
 import back from "../../public/icons/back.svg";
-import { MouseEventHandler, useContext, useEffect } from "react";
+import { MouseEventHandler, useContext, useEffect, useState } from "react";
 import { FavoritesContext } from "..";
 import Favorite from "./Favorite";
+import Sort from "../Sort";
 
 const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
   const { globalFavorites } = useContext(FavoritesContext);
-  const favoritesElements = globalFavorites.map((favorite, index) => (
+
+  useEffect(() => {}, [globalFavorites]);
+
+  const [sort, setSort] = useState("");
+  // function that handles the sorting of the podcasts.
+  const handleDataSort = () => {
+    switch (sort) {
+      case "a-z":
+        return globalFavorites.sort((a, b) =>
+          a.episodes.localeCompare(b.episodes)
+        );
+      case "z-a":
+        return globalFavorites.sort((a, b) =>
+          b.episodes.localeCompare(a.episodes)
+        );
+      case "updateAsc":
+        return globalFavorites.sort(
+          (a, b) => a.dateAdded.getTime() - b.dateAdded.getTime()
+        );
+      case "updateDesc":
+        return globalFavorites.sort(
+          (a, b) => b.dateAdded.getTime() - a.dateAdded.getTime()
+        );
+      default:
+        return globalFavorites;
+    }
+  };
+  // Stores the sorted data to be used to filter through
+  const sortedData = handleDataSort();
+
+  const favoritesElements = sortedData.map((favorite, index) => (
     <Favorite
       key={index}
       episode={favorite.episodes}
@@ -14,7 +45,6 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       username={favorite.username}
     />
   ));
-  useEffect(() => {}, [globalFavorites]);
 
   return (
     <div className="main--profile--container">
@@ -24,6 +54,7 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       </button>
       <div className="favorites">
         <h3 className="podcast--title">My Favorites</h3>
+        <Sort setSort={setSort}></Sort>
       </div>
       <div className="favorites--table">
         <div className="table--row table--heading podcast--info sticky">

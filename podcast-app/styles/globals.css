@@ -241,12 +241,12 @@ p {
   display: flex;
   justify-content: right;
   align-items: center;
-  padding-right: 3vw;
+  padding-right: 7vw;
 }
 
 .sort--select {
   width: 6vw;
-  height: 2vw;
+  height: 3vh;
   border-radius: 5px;
 }
 
@@ -477,12 +477,59 @@ p {
   top: 0;
   background-color: white;
 }
+
+.favorites {
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorites > .sort--container {
+  margin: 0;
+  padding: 0;
+  padding-top: 3vh;
+}
+
+.favorites > .podcast--title {
+  margin: 0;
+  padding: 0;
+  padding-top: 3vh;
+}
 @media screen and (max-width: 500px) {
+  .header {
+    width: 110vw;
+  }
+
+  .header--text {
+    padding-left: 7vw;
+  }
+
+  .search--input {
+    height: 3vh;
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 0px 0px 2px gray;
+    width: 12vw;
+  }
+
+  .sort--select {
+    width: 10vw;
+  }
+
   .spinner {
     width: 20vw;
     height: 20vh;
     top: 40vh;
     left: 40vw;
+  }
+
+  .sort--container {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 7vw;
   }
 
   .podcast--container {
@@ -595,5 +642,66 @@ p {
 
   .login--container {
     margin-bottom: 5vh;
+  }
+
+  .favorites--table {
+    width: 98vw;
+  }
+
+  .table--row {
+    display: flex;
+    width: 90vw;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+  }
+
+  .table--heading {
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .table--episode {
+    display: flex;
+    width: 30vw;
+    align-items: center;
+    font-size: small;
+  }
+
+  .table--show {
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    width: 35vw;
+    font-size: small;
+  }
+
+  .table--button:hover {
+    transform: scale(120%);
+    filter: invert(54%) sepia(24%) saturate(1117%) hue-rotate(313deg)
+      brightness(96%) contrast(110%);
+  }
+
+  .table--button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2vw;
+    font-size: small;
+    margin-left: 5vw;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
+
+  .main--profile--container {
+    padding-top: 5vh;
+  }
+
+  .favorites {
+    margin-bottom: 2vh;
   }
 }

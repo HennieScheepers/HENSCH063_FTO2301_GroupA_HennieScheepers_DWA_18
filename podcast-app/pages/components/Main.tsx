@@ -49,9 +49,8 @@ const Main = () => {
    * to disply only the podcasts which titles or genres container the search value
    */
   const [searchFilter, setSearchFilter] = useState("");
-  const { globalUserName, setGlobalUsername } = useContext(UserNameContext);
-  const { globalFavorites, setGlobalFavorites } = useContext(FavoritesContext);
-  const [favorites, setFavorites] = useState(globalFavorites);
+  const { globalUserName } = useContext(UserNameContext);
+  const { setGlobalFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
     /**
