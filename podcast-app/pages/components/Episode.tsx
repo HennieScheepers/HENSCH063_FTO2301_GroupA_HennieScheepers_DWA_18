@@ -18,30 +18,24 @@ const Episode = (props: {
   setCurrentEpisode: Function;
   setAudioSource: Function;
 }) => {
-  // Global state for username
-  const { globalUserName, setGlobalUsername } = useContext(UserNameContext);
+  // Global state for username. This gets set when the user logs in.
+  const { globalUserName } = useContext(UserNameContext);
 
   // Global state for the favorites
   const { globalFavorites, setGlobalFavorites } = useContext(FavoritesContext);
 
-  const { rerender, setRerender } = useContext(RerenderContext);
+  // A boolean value to force a rerender on the main component everytime the API data changes. This
+  // is done to make a new API call in order to update the favorites.
+  const { setRerender } = useContext(RerenderContext);
 
-  // let initialFavorite = false;
-  // for (let i = 0; i < globalFavorites.length; i++) {
-  //   if (
-  //     globalFavorites[i].show === props.showName &&
-  //     globalFavorites[i].episodes === props.title &&
-  //     globalFavorites[i].season === props.seasonNumber
-  //   ) {
-  //     initialFavorite = true;
-  //   }
-  // }
-
-  // console.log(`${props.title} initial Favorite : ${initialFavorite}`);
+  // State and setter that determines if a episode has been favorited. Alongside it is the setter
+  // for this value. If the episode was favorited the heart icon for the episode component will be
+  // filled red to indicate to the user that this episode is favorited
   const [isFavorited, setIsFavorited] = useState(props.isFavorited);
 
   const audio = new Audio(props.file);
 
+  // Function to handle the event for when the play button is clicked.
   const handlePlayClick = () => {
     if (props.currentEpisode !== props.title) {
       props.setAudioSource(props.file);
@@ -51,6 +45,47 @@ const Episode = (props: {
     }
   };
 
+  useEffect(() => {}, [props.isFavorited]);
+
+  // Forms part of the handleRemoveFromFavorites click function. This function removes the favorited
+  // episode from the favorite table in the database
+  const removeFromFavorites = async () => {
+    const { error } = await supabase
+      .from("favorite")
+      .delete()
+      .eq("username", globalUserName)
+      .eq("show", props.showName)
+      .eq("season", props.seasonNumber)
+      .eq("episodes", props.title);
+    if (error) {
+      console.log(error);
+    }
+
+    let newGlobalFavorites = [...globalFavorites];
+    for (let i = 0; i < newGlobalFavorites.length; i++) {
+      const element = newGlobalFavorites[i];
+      if (
+        props.showName === newGlobalFavorites[i].show &&
+        props.title === newGlobalFavorites[i].episodes &&
+        props.seasonNumber === newGlobalFavorites[i].season
+      ) {
+        newGlobalFavorites.splice(i, 1);
+      }
+    }
+
+    setGlobalFavorites(newGlobalFavorites);
+  };
+
+  // The event handler for when the user clicks a filled heart icon to unfavorite an episode.
+  const handleRemoveFromFavorites = () => {
+    removeFromFavorites();
+    setIsFavorited(false);
+    setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
+    console.log("removed");
+  };
+
+  // Forms part of the handleFavoriteClick. This function will add the new favorite to the favorites
+  // table. This table form a part of the database
   const addToFavorites = async () => {
     const { data, error } = await supabase.from("favorite").upsert([
       {
@@ -81,48 +116,14 @@ const Episode = (props: {
     }
   };
 
-  const removeFromFavorites = async () => {
-    const { error } = await supabase
-      .from("favorite")
-      .delete()
-      .eq("username", globalUserName)
-      .eq("show", props.showName)
-      .eq("season", props.seasonNumber)
-      .eq("episodes", props.title);
-    if (error) {
-      console.log(error);
-    }
-
-    let newGlobalFavorites = [...globalFavorites];
-    for (let i = 0; i < newGlobalFavorites.length; i++) {
-      const element = newGlobalFavorites[i];
-      if (
-        props.showName === newGlobalFavorites[i].show &&
-        props.title === newGlobalFavorites[i].episodes &&
-        props.seasonNumber === newGlobalFavorites[i].season
-      ) {
-        newGlobalFavorites.splice(i, 1);
-      }
-    }
-
-    setGlobalFavorites(newGlobalFavorites);
-  };
-
-  useEffect(() => {}, [props.isFavorited]);
-
-  const handleRemoveFromFavorites = () => {
-    removeFromFavorites();
-    setIsFavorited(false);
-    setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
-    console.log("removed");
-  };
-
+  // The event hadnler for when the user clicks on a unfilled heart in order to favorite an episode.
   const handleFavoriteClick = () => {
     addToFavorites();
     setIsFavorited(true);
     console.log("added");
     setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
   };
+
   return (
     <div>
       <p className="podcast--info episode--text">

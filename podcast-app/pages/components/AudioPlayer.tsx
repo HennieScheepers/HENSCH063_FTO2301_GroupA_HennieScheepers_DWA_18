@@ -6,7 +6,6 @@ const AudioPlayer = (props: { audioSource: string }) => {
   return (
     <>
       <audio className="audio--player" controls controlsList="nodownload">
-        sdasdasd
         <source src={audio} type="audio/mp3" />
       </audio>
     </>

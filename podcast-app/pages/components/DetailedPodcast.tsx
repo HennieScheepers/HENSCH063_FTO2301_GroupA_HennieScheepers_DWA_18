@@ -29,6 +29,7 @@ const DetailedPodcast = (props: {
   // Keeps track of whether or not the podcast image has finished loading
   const [isImageLoaded, setImageLoaded] = useState(false);
   const { setRerender } = useContext(RerenderContext);
+
   // Adds the number of seasons to the select element
   const seasonOptions = props.seasons.map((season) => (
     <MenuItem key={season.season} value={season.season}>
