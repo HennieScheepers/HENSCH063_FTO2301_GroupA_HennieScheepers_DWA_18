@@ -59,6 +59,7 @@ p {
   text-wrap: wrap;
   pointer-events: none;
   padding: 2vw;
+  margin-left: 5vw;
 }
 
 .podcast--title {
@@ -186,7 +187,7 @@ p {
 
 .podcast--details {
   overflow-y: auto;
-  height: 43vh;
+  height: 38vh;
 }
 
 .detailed--image--container {
@@ -259,12 +260,12 @@ p {
 .season--container {
   display: flex;
   flex-direction: column;
-  margin-top: 3vh;
   box-shadow: 0px 0px 2px gray;
-  padding: 2vw;
+  padding-left: 2vw;
   border-radius: 5px;
   overflow-y: auto;
-  height: 38vh;
+  height: 45vh;
+  margin-top: 4vh;
 }
 
 .season--image {
@@ -337,10 +338,9 @@ p {
 
 .audio--player {
   position: absolute;
-  bottom: 8vh;
-  width: 28vw;
+  bottom: 6vh;
+  width: 100vw;
   left: 0;
-  margin-left: 3vw;
   border-radius: 0;
 }
 

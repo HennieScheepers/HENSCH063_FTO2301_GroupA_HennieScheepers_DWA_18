@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import spinner from "../../public/icons/spinner.svg";
 import { UserNameContext } from "../index";
 import { FavoritesContext } from "../index";
+import AudioPlayer from "./AudioPlayer";
 
 const Season = (props: {
   showName: string;
@@ -131,14 +132,7 @@ const Season = (props: {
         Episodes: {episodeElements.length}
       </p>
       <div className="episodes--container">{episodeElements}</div>
-      {audioSource && (
-        <>
-          <h3>{currentEpisode}</h3>
-          <audio className="audio--player" controls controlsList="nodownload">
-            <source src={audioSource} type="audio/mp3" />
-          </audio>
-        </>
-      )}
+      {audioSource && <AudioPlayer audioSource={audioSource} />}
     </div>
   );
 };
