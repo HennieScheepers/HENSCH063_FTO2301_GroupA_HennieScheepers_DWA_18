@@ -8,6 +8,8 @@ import Spinner from "./Spinner";
 import createUpdatedDate from "../helpers/createUpdatedDate";
 import Sort from "./Sort";
 import { FavoritesContext } from "../index";
+import Carousel from "./Carousel";
+import { IPodcast } from "./Carousel";
 
 interface Rerender {
   rerender: boolean;
@@ -18,6 +20,8 @@ export const RerenderContext = createContext<Rerender>({
   setRerender: () => {},
 });
 const Main = () => {
+  console.log("rerendered");
+
   // Provided to RerenderContext in order to make Main.tsx rerender when the back button in
   // DetailedPodcast is clicked
   const [rerender, setRerender] = useState(false);
@@ -107,6 +111,21 @@ const Main = () => {
   // Stores the sorted data to be used to filter through
   const sortedData = handleDataSort();
 
+  // Set the array for the carousel to display some random podcast
+  const randomPodcastArray = () => {
+    let array = [] as IPodcast[];
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * sortedData.length);
+      array[i] = {
+        podcastTitle: sortedData[randomIndex].title,
+        imageSrc: sortedData[randomIndex].image,
+        podcastDescription: sortedData[randomIndex].description,
+      };
+    }
+
+    return array;
+  };
+
   // Create an array which holds the podcasts with the matching genres/ titles
   const filteredData = sortedData.filter((podcast) => {
     if (podcast.title.toLowerCase().includes(searchFilter.toLowerCase())) {
@@ -138,8 +157,13 @@ const Main = () => {
     <RerenderContext.Provider value={{ rerender, setRerender }}>
       <div>
         <Header setSearchFilter={setSearchFilter} searchFilter={searchFilter} />
-        <Sort setSort={setSort} sort={sort as ""} />
         {apiData[1] === undefined && <Spinner />}
+        {sortedData[1] ? (
+          <Carousel arrayOfPodcasts={randomPodcastArray()} />
+        ) : (
+          <p>sortedData not found</p>
+        )}
+        <Sort setSort={setSort} sort={sort as ""} />
         {apiData[1] !== undefined && podcastElements}
       </div>
     </RerenderContext.Provider>
