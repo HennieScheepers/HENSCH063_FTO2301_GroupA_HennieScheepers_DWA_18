@@ -1,7 +1,7 @@
-import Select, { SelectChangeEvent, SelectProps } from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
-const Sort = (props: { setSort: Function; sort: "" }) => {
+const Sort = (props: { setSort: Function; showShowSort: boolean }) => {
   const handleChange = (event: SelectChangeEvent<"">) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
@@ -15,7 +15,7 @@ const Sort = (props: { setSort: Function; sort: "" }) => {
       <Select
         labelId="sort"
         className="sort--select"
-        value={props.sort}
+        value=""
         onChange={handleChange}
       >
         <MenuItem className="sort--option" value={"a-z"}>
@@ -30,6 +30,16 @@ const Sort = (props: { setSort: Function; sort: "" }) => {
         <MenuItem className="sort--option" value={"updateDesc"}>
           Date updated ⬇
         </MenuItem>
+        {props.showShowSort && (
+          <MenuItem className="sort--option" value={"show-a-z"}>
+            Show ⬇
+          </MenuItem>
+        )}
+        {props.showShowSort && (
+          <MenuItem className="sort--option" value={"show-z-a"}>
+            Show ⬆
+          </MenuItem>
+        )}
       </Select>
     </div>
   );

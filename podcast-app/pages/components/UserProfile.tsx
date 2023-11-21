@@ -3,14 +3,16 @@ import back from "../../public/icons/back.svg";
 import { MouseEventHandler, useContext, useEffect, useState } from "react";
 import { FavoritesContext } from "..";
 import Favorite from "./Favorite";
-import Sort from "../Sort";
+import Sort from "./Sort";
 
 const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
   const { globalFavorites } = useContext(FavoritesContext);
+  console.log(globalFavorites);
 
   useEffect(() => {}, [globalFavorites]);
 
   const [sort, setSort] = useState("");
+
   // function that handles the sorting of the podcasts.
   const handleDataSort = () => {
     switch (sort) {
@@ -23,17 +25,28 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
           b.episodes.localeCompare(a.episodes)
         );
       case "updateAsc":
-        return globalFavorites.sort(
-          (a, b) => a.dateAdded.getTime() - b.dateAdded.getTime()
-        );
+        return globalFavorites.sort((a, b) => {
+          const dateA = new Date(a.dateAdded).getTime();
+          const dateB = new Date(b.dateAdded).getTime();
+          return dateB - dateA;
+        });
+
       case "updateDesc":
-        return globalFavorites.sort(
-          (a, b) => b.dateAdded.getTime() - a.dateAdded.getTime()
-        );
+        return globalFavorites.sort((a, b) => {
+          const dateA = new Date(a.dateAdded).getTime();
+          const dateB = new Date(b.dateAdded).getTime();
+          return dateA - dateB;
+        });
+
+      case "show-a-z":
+        return globalFavorites.sort((a, b) => a.show.localeCompare(b.show));
+      case "show-z-a":
+        return globalFavorites.sort((a, b) => b.show.localeCompare(a.show));
       default:
         return globalFavorites;
     }
   };
+
   // Stores the sorted data to be used to filter through
   const sortedData = handleDataSort();
 
@@ -43,6 +56,7 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       episode={favorite.episodes}
       show={favorite.show}
       username={favorite.username}
+      dateAdded={favorite.dateAdded}
     />
   ));
 
@@ -54,7 +68,7 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       </button>
       <div className="favorites">
         <h3 className="podcast--title">My Favorites</h3>
-        <Sort setSort={setSort}></Sort>
+        <Sort setSort={setSort} showShowSort></Sort>
       </div>
       <div className="favorites--table">
         <div className="table--row table--heading podcast--info sticky">

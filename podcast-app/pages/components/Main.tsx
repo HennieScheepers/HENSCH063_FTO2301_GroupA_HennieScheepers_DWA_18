@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, createContext } from "react";
+import { useEffect, useState, useContext, createContext, useRef } from "react";
 import supabase from "../config/supabaseClient";
 import { UserNameContext } from "../index";
 import axios from "axios";
@@ -111,20 +111,27 @@ const Main = () => {
   // Stores the sorted data to be used to filter through
   const sortedData = handleDataSort();
 
-  // Set the array for the carousel to display some random podcast
-  const randomPodcastArray = () => {
-    let array = [] as IPodcast[];
-    for (let i = 0; i < 5; i++) {
-      const randomIndex = Math.floor(Math.random() * sortedData.length);
-      array[i] = {
-        podcastTitle: sortedData[randomIndex].title,
-        imageSrc: sortedData[randomIndex].image,
-        podcastDescription: sortedData[randomIndex].description,
-      };
-    }
+  const [randomArray, setRandomArray] = useState<IPodcast[]>([]);
 
-    return array;
-  };
+  useEffect(() => {
+    // Set the array for the carousel to display some random podcast
+    const randomPodcastArray = () => {
+      let array = [] as IPodcast[];
+      for (let i = 0; i < 5; i++) {
+        const randomIndex = Math.floor(Math.random() * sortedData.length);
+        array[i] = {
+          podcastTitle: sortedData[randomIndex].title,
+          imageSrc: sortedData[randomIndex].image,
+          podcastDescription: sortedData[randomIndex].description,
+        };
+      }
+
+      setRandomArray(array);
+      console.log(array);
+    };
+
+    randomPodcastArray();
+  }, [sortedData]);
 
   // Create an array which holds the podcasts with the matching genres/ titles
   const filteredData = sortedData.filter((podcast) => {
@@ -158,12 +165,8 @@ const Main = () => {
       <div>
         <Header setSearchFilter={setSearchFilter} searchFilter={searchFilter} />
         {apiData[1] === undefined && <Spinner />}
-        {sortedData[1] ? (
-          <Carousel arrayOfPodcasts={randomPodcastArray()} />
-        ) : (
-          <p>sortedData not found</p>
-        )}
-        <Sort setSort={setSort} sort={sort as ""} />
+        {sortedData[1] ? <Carousel arrayOfPodcasts={randomArray} /> : <p></p>}
+        <Sort setSort={setSort} showShowSort={false} />
         {apiData[1] !== undefined && podcastElements}
       </div>
     </RerenderContext.Provider>

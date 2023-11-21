@@ -7,6 +7,7 @@ const Favorite = (props: {
   episode: string;
   show: string;
   username: string;
+  dateAdded: Date;
 }) => {
   const { globalFavorites, setGlobalFavorites } = useContext(FavoritesContext);
   const handleRemoveClick = async (event: MouseEvent) => {
@@ -35,9 +36,19 @@ const Favorite = (props: {
 
     setGlobalFavorites(newGlobalFavorites);
   };
+
+  const dateAdded = new Date(props.dateAdded);
   return (
     <div className="table--row podcast--info">
-      <div className="table--episode">{props.episode}</div>
+      <div className="table--episode">
+        {props.episode}
+        <div>
+          <p className="favorite--date">
+            Added: {dateAdded.toLocaleTimeString()}{" "}
+            {dateAdded.toLocaleDateString()}{" "}
+          </p>
+        </div>
+      </div>
       <div className="table--show">{props.show}</div>
       <button
         onClick={(event) => handleRemoveClick(event)}
