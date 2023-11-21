@@ -25,10 +25,39 @@ body {
   background-color: transparent;
 }
 
+@keyframes podcast-animation {
+  from {
+    border-radius: 100%;
+    transform: scale(100%);
+  }
+  to {
+    border-radius: 10px;
+    transform: scale(110%);
+    box-shadow: 7px 7px 7px gray;
+  }
+}
+
+@keyframes podcast-animation-from-hover {
+  from {
+    border-radius: 10px;
+    transform: scale(110%);
+    box-shadow: 7px 7px 7px gray;
+  }
+  to {
+    transform: scale(100%);
+
+    border-radius: 100%;
+  }
+}
+
 .podcast--container:hover {
   .podcast--image {
     transform: scale(110%);
     box-shadow: 7px 7px 7px gray;
+    animation-name: podcast-animation;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-fill-mode: forwards;
   }
 }
 
@@ -43,10 +72,14 @@ body {
 .podcast--image {
   width: 12vw;
   height: 12vw;
-  border-radius: 10px;
+  border-radius: 100%;
   box-shadow: 5px 5px 5px gray;
   pointer-events: none;
   margin-top: 5vh;
+  animation-name: podcast-animation-from-hover;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
 }
 
 p {
@@ -524,7 +557,8 @@ p {
 
 .carousel--podcast {
   padding-bottom: 2vh;
-  border-radius: 10px;
+  padding: 2vh;
+  border-radius: 100%;
 }
 
 .carousel--description {

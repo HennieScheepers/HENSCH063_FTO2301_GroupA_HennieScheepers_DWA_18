@@ -16,8 +16,8 @@ const CarouselItem = (props: {
           <Image
             src={props.imageSrc}
             alt={"Podcast Image"}
-            width={300}
-            height={300}
+            width={250}
+            height={250}
             className="carousel--podcast"
           ></Image>
           <p className="podcast--description carousel--description">
