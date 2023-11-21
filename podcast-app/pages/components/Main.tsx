@@ -38,7 +38,7 @@ const Main = () => {
           season: 0,
           title: "",
           image: "",
-          episode: [{ description: " ", episode: 0, file: " ", title: " " }],
+          episodes: [{ description: " ", episode: 0, file: " ", title: " " }],
         },
       ],
       title: "" as string,
