@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, createContext, useRef } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import supabase from "../config/supabaseClient";
 import { UserNameContext } from "../index";
 import axios from "axios";
@@ -20,8 +20,6 @@ export const RerenderContext = createContext<Rerender>({
   setRerender: () => {},
 });
 const Main = () => {
-  console.log("rerendered");
-
   // Provided to RerenderContext in order to make Main.tsx rerender when the back button in
   // DetailedPodcast is clicked
   const [rerender, setRerender] = useState(false);
@@ -127,7 +125,6 @@ const Main = () => {
       }
 
       setRandomArray(array);
-      console.log(array);
     };
 
     randomPodcastArray();

@@ -7,7 +7,6 @@ import Sort from "./Sort";
 
 const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
   const { globalFavorites } = useContext(FavoritesContext);
-  console.log(globalFavorites);
 
   useEffect(() => {}, [globalFavorites]);
 

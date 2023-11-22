@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Spinner from "./Spinner";
 
 const CarouselItem = (props: {
   podcastTitle: string;
@@ -13,13 +14,17 @@ const CarouselItem = (props: {
           <h3 className="podcast--tile carousel--title">
             {props.podcastTitle}
           </h3>
-          <Image
-            src={props.imageSrc}
-            alt={"Podcast Image"}
-            width={250}
-            height={250}
-            className="carousel--podcast"
-          ></Image>
+          {!props.imageSrc ? (
+            <Spinner />
+          ) : (
+            <Image
+              src={props.imageSrc}
+              alt={"Podcast Image"}
+              width={250}
+              height={250}
+              className="carousel--podcast"
+            ></Image>
+          )}
           <p className="podcast--description carousel--description">
             {props.podcastDescription}
           </p>

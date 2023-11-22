@@ -13,7 +13,6 @@ const Carousel = (props: { arrayOfPodcasts: IPodcast[] }) => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      console.log(counter);
       if (counter === 4) {
         setCounter(0);
       } else {
