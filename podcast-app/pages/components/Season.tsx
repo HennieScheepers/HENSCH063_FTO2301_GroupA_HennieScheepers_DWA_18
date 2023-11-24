@@ -87,9 +87,8 @@ const Season = (props: {
         file={episode.file}
         seasonNumber={season}
         isFavorited={isFavorited}
-        setAudioSource={setAudioSource}
         currentEpisode={currentEpisode}
-        setCurrentEpisode={setCurrentEpisode}
+        seasonImage={seasonImage}
       />
     );
   });
@@ -132,7 +131,6 @@ const Season = (props: {
         Episodes: {episodeElements.length}
       </p>
       <div className="episodes--container">{episodeElements}</div>
-      {audioSource && <AudioPlayer audioSource={audioSource} />}
     </div>
   );
 };

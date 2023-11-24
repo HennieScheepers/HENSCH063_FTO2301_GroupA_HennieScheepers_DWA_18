@@ -10,20 +10,31 @@ import Sort from "./Sort";
 import { FavoritesContext } from "../index";
 import Carousel from "./Carousel";
 import { IPodcast } from "./Carousel";
+import AudioPlayer from "./AudioPlayer";
 
 interface Rerender {
   rerender: boolean;
   setRerender: Function;
 }
+
 export const RerenderContext = createContext<Rerender>({
   rerender: false,
   setRerender: () => {},
 });
+
+export const AudioContext = createContext({});
 const Main = () => {
   // Provided to RerenderContext in order to make Main.tsx rerender when the back button in
   // DetailedPodcast is clicked
   const [rerender, setRerender] = useState(false);
 
+  interface IAudio {
+    audioLink: string;
+    episodeName: string;
+    seasonImage: string;
+  }
+  // AudioContext value
+  const [audioInfo, setAudioInfo] = useState<IAudio>();
   /**
    * initial state of apiData. Array will be populated following the API call
    */
@@ -176,23 +187,35 @@ const Main = () => {
 
   return (
     <RerenderContext.Provider value={{ rerender, setRerender }}>
-      <div>
-        <Header setSearchFilter={setSearchFilter} searchFilter={searchFilter} />
-        {apiData[1] === undefined && <Spinner />}
-        {sortedData[1] ? <Carousel arrayOfPodcasts={randomArray} /> : <p></p>}
-        <div className="sort--button--container">
-          {genreFilter !== "" && (
-            <button
-              onClick={handleResetClick}
-              className="primary--button reset--button"
-            >
-              Reset Genres
-            </button>
+      <AudioContext.Provider value={{ audioInfo, setAudioInfo }}>
+        <div>
+          <Header
+            setSearchFilter={setSearchFilter}
+            searchFilter={searchFilter}
+          />
+          {apiData[1] === undefined && <Spinner />}
+          {sortedData[1] ? <Carousel arrayOfPodcasts={randomArray} /> : <p></p>}
+          <div className="sort--button--container">
+            {genreFilter !== "" && (
+              <button
+                onClick={handleResetClick}
+                className="primary--button reset--button"
+              >
+                Reset Genres
+              </button>
+            )}
+            <Sort setSort={setSort} showShowSort={false} />
+          </div>
+          {apiData[1] !== undefined && podcastElements}
+          {audioInfo && (
+            <AudioPlayer
+              audioSource={audioInfo.audioLink}
+              imgSrc={audioInfo.seasonImage}
+              episodeName={audioInfo.episodeName}
+            />
           )}
-          <Sort setSort={setSort} showShowSort={false} />
         </div>
-        {apiData[1] !== undefined && podcastElements}
-      </div>
+      </AudioContext.Provider>
     </RerenderContext.Provider>
   );
 };

@@ -6,6 +6,7 @@ import { UserNameContext } from "../index";
 import supabase from "../config/supabaseClient";
 import { FavoritesContext } from "../index";
 import { RerenderContext } from "./Main";
+import { AudioContext } from "./Main";
 
 const Episode = (props: {
   title: string;
@@ -15,8 +16,7 @@ const Episode = (props: {
   isFavorited: boolean;
   file: string;
   currentEpisode: string | null;
-  setCurrentEpisode: Function;
-  setAudioSource: Function;
+  seasonImage: string;
 }) => {
   // Global state for username. This gets set when the user logs in.
   const { globalUserName } = useContext(UserNameContext);
@@ -35,14 +35,21 @@ const Episode = (props: {
 
   const audio = new Audio(props.file);
 
+  const { setAudioInfo } = useContext(AudioContext);
+
   // Function to handle the event for when the play button is clicked.
   const handlePlayClick = () => {
-    if (props.currentEpisode !== props.title) {
-      props.setAudioSource(props.file);
-      props.setCurrentEpisode(props.title);
-    } else {
-      audio.pause();
-    }
+    // if (props.currentEpisode !== props.title) {
+    //   props.setAudioSource(props.file);
+    //   props.setCurrentEpisode(props.title);
+    // } else {
+    //   audio.pause();
+    // }
+    setAudioInfo({
+      audioLink: props.file,
+      episodeName: props.title,
+      seasonImage: props.seasonImage,
+    });
   };
 
   useEffect(() => {}, [props.isFavorited]);
