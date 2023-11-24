@@ -24,6 +24,8 @@ const Podcast = (props: {
   description: string;
   image: string;
   id: number;
+  genreFilter: string;
+  setGenreFilter: Function;
 }) => {
   /**
    * Boolean value to determine if the main page is to be rendered or the detailed view
@@ -58,6 +60,22 @@ const Podcast = (props: {
   });
 
   const [genreString, setGenreString] = useState("");
+
+  const genresArray = genreString.split(",");
+
+  const handleGenreClick = (genre: string) => {
+    props.setGenreFilter(genre);
+  };
+
+  const genreElements = genresArray.map((genre, index) => (
+    <button
+      className="genre--button"
+      key={index}
+      onClick={() => handleGenreClick(genre)}
+    >
+      {genre}
+    </button>
+  ));
   // Handler that sets the state needed for the detailed view
   const handleShowDetailedView = () =>
     setShowDetailedView((prevValue) => !prevValue);
@@ -97,12 +115,8 @@ const Podcast = (props: {
   return (
     <div className="main--container">
       {genreString === "" && <Spinner />}
-      {genreString !== "" && (
-        <div
-          className="podcast--container"
-          id={props.id.toString()}
-          onClick={(e) => getData(e)}
-        >
+      {genreString !== "" && genreString.includes(props.genreFilter) && (
+        <div className="podcast--container" id={props.id.toString()}>
           <Image
             className="podcast--image"
             src={props.image}
@@ -110,16 +124,27 @@ const Podcast = (props: {
             height={80}
             alt="podcast cover image"
             priority
+            onClick={(e) => getData(e)}
           />
           <div className="podcast--info--container">
-            <p className="podcast--title">{props.title}</p>
-            <p className="podcast--info">Genres: {genreString}</p>
+            <p className="podcast--title" onClick={(e) => getData(e)}>
+              {props.title}
+            </p>
+            <p className="podcast--info">
+              Genres: <span>{genreElements}</span>
+            </p>
             <p className="podcast--info">
               Seasons: {props.seasons as ReactNode}
             </p>
-            <p className="podcast--info">Last updated: {props.lastUpdated}</p>
-            <p className="podcast--info">Description:</p>
-            <p className="podcast--description">{props.description}</p>
+            <p className="podcast--info" onClick={(e) => getData(e)}>
+              Last updated: {props.lastUpdated}
+            </p>
+            <p className="podcast--info" onClick={(e) => getData(e)}>
+              Description:
+            </p>
+            <p className="podcast--description" onClick={(e) => getData(e)}>
+              {props.description}
+            </p>
           </div>
         </div>
       )}

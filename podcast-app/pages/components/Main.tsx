@@ -111,6 +111,13 @@ const Main = () => {
 
   const [randomArray, setRandomArray] = useState<IPodcast[]>([]);
 
+  // Keeps track of the genre filter
+  const [genreFilter, setGenreFilter] = useState("");
+
+  const handleGenreFilterChange = (genre: string) => {
+    setGenreFilter(genre);
+  };
+
   useEffect(() => {
     // Set the array for the carousel to display some random podcast
     const randomPodcastArray = () => {
@@ -132,10 +139,18 @@ const Main = () => {
 
   // Create an array which holds the podcasts with the matching genres/ titles
   const filteredData = sortedData.filter((podcast) => {
-    if (podcast.title.toLowerCase().includes(searchFilter.toLowerCase())) {
+    if (
+      podcast.title.toLowerCase().includes(searchFilter.toLowerCase()) &&
+      podcast
+    ) {
       return podcast;
     }
   });
+
+  // Resets the genre filter
+  const handleResetClick = () => {
+    setGenreFilter("");
+  };
 
   // map through filtered elements to only display the filtered elements
   const podcastElements = filteredData.map((podcast) => {
@@ -153,6 +168,8 @@ const Main = () => {
         image={podcast.image}
         id={parseInt(podcast.id)}
         seasons={podcast.seasons}
+        genreFilter={genreFilter}
+        setGenreFilter={handleGenreFilterChange}
       />
     );
   });
@@ -163,7 +180,17 @@ const Main = () => {
         <Header setSearchFilter={setSearchFilter} searchFilter={searchFilter} />
         {apiData[1] === undefined && <Spinner />}
         {sortedData[1] ? <Carousel arrayOfPodcasts={randomArray} /> : <p></p>}
-        <Sort setSort={setSort} showShowSort={false} />
+        <div className="sort--button--container">
+          {genreFilter !== "" && (
+            <button
+              onClick={handleResetClick}
+              className="primary--button reset--button"
+            >
+              Reset Genres
+            </button>
+          )}
+          <Sort setSort={setSort} showShowSort={false} />
+        </div>
         {apiData[1] !== undefined && podcastElements}
       </div>
     </RerenderContext.Provider>

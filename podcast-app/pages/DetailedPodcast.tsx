@@ -2,7 +2,6 @@ import Image from "next/image";
 import back from "../public/icons/back.svg";
 import spinner from "../public/icons/spinner.svg";
 import { useState } from "react";
-import Season from "./Season";
 
 const DetailedPodcast = (props: {
   description: string;

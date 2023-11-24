@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import accountIcon from "../../public/icons/accountIcon.svg";
-import searchIcon from "../../public/icons/searchIcon.svg";
 import Image from "next/image";
 import UserProfile from "./UserProfile";
+import Fuse from "fuse.js";
 
 const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
   // Handles the onChange event when the user types into the search bar.
@@ -15,9 +15,11 @@ const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
 
   // boolean value that determines if userProfile is to be displayed
   const [showUserProfile, setShowUserProfile] = useState(false);
+
   const handleProfileClick = () => {
     setShowUserProfile((prevValue) => !prevValue);
   };
+
   return (
     <div className="header">
       <h3 className="header--text">PodPlay</h3>
