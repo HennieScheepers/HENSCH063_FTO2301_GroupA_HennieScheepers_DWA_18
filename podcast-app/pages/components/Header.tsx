@@ -3,6 +3,7 @@ import accountIcon from "../../public/icons/accountIcon.svg";
 import Image from "next/image";
 import UserProfile from "./UserProfile";
 import Fuse from "fuse.js";
+import headphone from "../../public/icons/headphone.png";
 
 const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
   // Handles the onChange event when the user types into the search bar.
@@ -22,7 +23,10 @@ const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
 
   return (
     <div className="header">
-      <h3 className="header--text">PodPlay</h3>
+      <div className="logo--container">
+        <Image src={headphone} alt="logo" width={20} height={20} />
+        <h3 className="header--text">PodPlay</h3>
+      </div>
       <div className="header--button--container">
         <div className="search--container">
           <input
