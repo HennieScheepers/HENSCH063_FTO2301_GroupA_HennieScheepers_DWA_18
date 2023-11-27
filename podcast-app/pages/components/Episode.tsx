@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from "react";
 import { UserNameContext } from "../index";
 import supabase from "../config/supabaseClient";
 import { FavoritesContext } from "../index";
-import { RerenderContext } from "./Main";
+import { IAudioContext, RerenderContext } from "./Main";
 import { AudioContext } from "./Main";
 
 const Episode = (props: {
@@ -35,7 +35,7 @@ const Episode = (props: {
 
   const audio = new Audio(props.file);
 
-  const { setAudioInfo } = useContext(AudioContext);
+  const { setAudioInfo } = useContext(AudioContext) as IAudioContext;
 
   // Function to handle the event for when the play button is clicked.
   const handlePlayClick = () => {
@@ -112,6 +112,7 @@ const Episode = (props: {
           season: props.seasonNumber,
           episodes: props.title,
           id: props.id,
+          dateAdded: new Date(),
         };
         newGlobalFavorites.push(element);
       }

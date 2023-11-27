@@ -22,17 +22,22 @@ export const RerenderContext = createContext<Rerender>({
   setRerender: () => {},
 });
 
-export const AudioContext = createContext({});
+interface IAudio {
+  audioLink: string;
+  episodeName: string;
+  seasonImage: string;
+}
+
+export interface IAudioContext {
+  audioInfo: IAudio;
+  setAudioInfo: React.Dispatch<React.SetStateAction<IAudio>>;
+}
+export const AudioContext = createContext<IAudioContext | undefined>(undefined);
 const Main = () => {
   // Provided to RerenderContext in order to make Main.tsx rerender when the back button in
   // DetailedPodcast is clicked
   const [rerender, setRerender] = useState(false);
 
-  interface IAudio {
-    audioLink: string;
-    episodeName: string;
-    seasonImage: string;
-  }
   // AudioContext value
   const [audioInfo, setAudioInfo] = useState<IAudio>({
     audioLink: "",
