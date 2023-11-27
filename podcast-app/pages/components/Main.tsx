@@ -34,7 +34,11 @@ const Main = () => {
     seasonImage: string;
   }
   // AudioContext value
-  const [audioInfo, setAudioInfo] = useState<IAudio>();
+  const [audioInfo, setAudioInfo] = useState<IAudio>({
+    audioLink: "",
+    episodeName: "",
+    seasonImage: "",
+  });
   /**
    * initial state of apiData. Array will be populated following the API call
    */
@@ -207,11 +211,12 @@ const Main = () => {
             <Sort setSort={setSort} showShowSort={false} />
           </div>
           {apiData[1] !== undefined && podcastElements}
-          {audioInfo && (
+          {audioInfo.audioLink !== "" && (
             <AudioPlayer
               audioSource={audioInfo.audioLink}
               imgSrc={audioInfo.seasonImage}
               episodeName={audioInfo.episodeName}
+              setAudioInfo={setAudioInfo}
             />
           )}
         </div>

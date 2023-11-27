@@ -131,7 +131,7 @@ const Podcast = (props: {
               {props.title}
             </p>
             <p className="podcast--info">
-              Genres: <span>{genreElements}</span>
+              Genres: <span className="genre--info">{genreElements}</span>
             </p>
             <p className="podcast--info">
               Seasons: {props.seasons as ReactNode}
