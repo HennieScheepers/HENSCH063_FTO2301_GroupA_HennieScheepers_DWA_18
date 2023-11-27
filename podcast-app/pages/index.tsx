@@ -1,6 +1,7 @@
 import { useState, createContext } from "react";
 import Auth from "./components/Auth";
 import Main from "./components/Main";
+import favicon from "../public/icons/favicon.svg";
 
 interface IUserName {
   globalUserName: string;
@@ -50,6 +51,49 @@ export default function Home() {
       <FavoritesContext.Provider
         value={{ globalFavorites, setGlobalFavorites }}
       >
+        <link rel="icon" type="image/svg+xml" href={favicon} />
+        <link rel="icon" type="image/png" href={favicon} />
+
+        {/* <!-- Primary Meta Tags --> */}
+        <title>Listen to all your favorite podcasts.</title>
+        <meta name="title" content="Listen to all your favorite podcasts." />
+        <meta
+          name="description"
+          content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
+        />
+
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://metatags.io/" />
+        <meta
+          property="og:title"
+          content="Listen to all your favorite podcasts."
+        />
+        <meta
+          property="og:description"
+          content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
+        />
+        <meta
+          property="og:image"
+          content="https://metatags.io/images/meta-tags.png"
+        />
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta
+          property="twitter:title"
+          content="Listen to all your favorite podcasts."
+        />
+        <meta
+          property="twitter:description"
+          content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
+        />
+        <meta
+          property="twitter:image"
+          content="https://metatags.io/images/meta-tags.png"
+        />
+
         <div>{displayComponent}</div>
       </FavoritesContext.Provider>
     </UserNameContext.Provider>

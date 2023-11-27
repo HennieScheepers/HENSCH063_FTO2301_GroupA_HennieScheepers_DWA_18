@@ -56,6 +56,7 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       show={favorite.show}
       username={favorite.username}
       dateAdded={favorite.dateAdded}
+      season={favorite.season}
     />
   ));
 
@@ -72,7 +73,7 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
       <div className="favorites--table">
         <div className="table--row table--heading podcast--info sticky">
           <div className="table--episode">Episode</div>
-          <div className="table--show">Show</div>
+          <div className="table--show">Show(Season)</div>
           <div className="table--button">Actions</div>
         </div>
         {favoritesElements[0] ? (
