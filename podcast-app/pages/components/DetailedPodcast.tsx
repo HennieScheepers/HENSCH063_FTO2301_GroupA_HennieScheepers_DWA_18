@@ -30,7 +30,7 @@ const DetailedPodcast = (props: {
   const [isImageLoaded, setImageLoaded] = useState(false);
   const { setRerender } = useContext(RerenderContext);
   // Adds the number of seasons to the select element
-  const seasonOptions = props.seasons.map((season) => (
+  const seasonOptions = props.seasons?.map((season) => (
     <MenuItem key={season.season} value={season.season}>
       {season.season}
     </MenuItem>
@@ -65,9 +65,9 @@ const DetailedPodcast = (props: {
         <div className="podcast--details">
           <p className="podcast--title">{props.title}</p>
           <p className="podcast--info">Genres: {props.genres}</p>
-          <p className="podcast--info">Seasons: {seasonOptions.length}</p>
+          <p className="podcast--info">Seasons: {seasonOptions?.length}</p>
           <p className="podcast--info">
-            Last updated: {props.updated.toString()}
+            Last updated: {props.updated?.toString()}
           </p>
           <p className="podcast--info">Description:</p>
           <p className="podcast--description">{props.description}</p>

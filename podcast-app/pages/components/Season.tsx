@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import spinner from "../../public/icons/spinner.svg";
 import { UserNameContext } from "../index";
 import { FavoritesContext } from "../index";
-import AudioPlayer from "./AudioPlayer";
 
 const Season = (props: {
   showName: string;
@@ -29,8 +28,8 @@ const Season = (props: {
   const [season, setSeason] = useState(1);
 
   // Keeps track of the current season image
-  const [seasonImage, setSeasonImage] = useState(
-    props.seasons[season - 1].image
+  const [seasonImage, setSeasonImage] = useState<string | null>(
+    props.seasons ? props.seasons[season - 1].image : null
   );
 
   const { globalUserName } = useContext(UserNameContext);
@@ -76,23 +75,24 @@ const Season = (props: {
   const [currentEpisode, setCurrentEpisode] = useState(null);
 
   // Map to create elements for the episodes of the seasons
-  const episodeElements = props.seasons[season - 1].episodes.map((episode) => {
-    const isFavorited = favorites.includes(episode.title) ? true : false;
-    return (
-      <Episode
-        key={episode.episode}
-        title={episode.title}
-        id={episode.episode}
-        showName={props.showName}
-        file={episode.file}
-        seasonNumber={season}
-        isFavorited={isFavorited}
-        currentEpisode={currentEpisode}
-        seasonImage={seasonImage}
-      />
-    );
-  });
-  1;
+  const episodeElements = props.seasons
+    ? props.seasons[season - 1].episodes.map((episode) => {
+        const isFavorited = favorites.includes(episode.title) ? true : false;
+        return (
+          <Episode
+            key={episode.episode}
+            title={episode.title}
+            id={episode.episode}
+            showName={props.showName}
+            file={episode.file}
+            seasonNumber={season}
+            isFavorited={isFavorited}
+            currentEpisode={currentEpisode}
+            seasonImage={seasonImage}
+          />
+        );
+      })
+    : [];
 
   // Event handler that handles the onChange event for the Select. This determines
   // the season selected by the user

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, createContext } from "react";
-import supabase from "../config/supabaseClient";
+import supabase from "../../public/config/supabaseClient";
 import { UserNameContext } from "../index";
 import axios from "axios";
 import Podcast from "./Podcast";
@@ -32,7 +32,9 @@ export interface IAudioContext {
   audioInfo: IAudio;
   setAudioInfo: React.Dispatch<React.SetStateAction<IAudio>>;
 }
+
 export const AudioContext = createContext<IAudioContext | undefined>(undefined);
+
 const Main = () => {
   // Provided to RerenderContext in order to make Main.tsx rerender when the back button in
   // DetailedPodcast is clicked

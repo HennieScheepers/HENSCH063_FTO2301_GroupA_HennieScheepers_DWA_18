@@ -1,4 +1,3 @@
-import Image from "next/image";
 import CarouselItem from "./CarouselItem";
 import { useEffect, useState } from "react";
 
@@ -24,7 +23,7 @@ const Carousel = (props: { arrayOfPodcasts: IPodcast[] }) => {
     return () => clearTimeout(timeoutId);
   }, [counter]);
 
-  const carouselElements = props.arrayOfPodcasts.map((podcast, index) => (
+  const carouselElements = props.arrayOfPodcasts?.map((podcast, index) => (
     <CarouselItem
       key={index}
       podcastTitle={podcast.podcastTitle}

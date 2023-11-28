@@ -1,4 +1,4 @@
-import supabase from "../config/supabaseClient";
+import supabase from "../../public/config/supabaseClient";
 import { useState, useEffect, ChangeEvent } from "react";
 
 const SignUp = (props: {

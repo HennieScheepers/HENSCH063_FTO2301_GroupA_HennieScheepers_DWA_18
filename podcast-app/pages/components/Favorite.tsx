@@ -1,6 +1,6 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { MouseEvent, useContext } from "react";
-import supabase from "../config/supabaseClient";
+import supabase from "../../public/config/supabaseClient";
 import { FavoritesContext } from "..";
 
 const Favorite = (props: {

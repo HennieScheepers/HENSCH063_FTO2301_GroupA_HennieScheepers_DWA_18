@@ -3,7 +3,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState, useContext, useEffect } from "react";
 import { UserNameContext } from "../index";
-import supabase from "../config/supabaseClient";
+import supabase from "../../public/config/supabaseClient";
 import { FavoritesContext } from "../index";
 import { IAudioContext, RerenderContext } from "./Main";
 import { AudioContext } from "./Main";
@@ -16,7 +16,7 @@ const Episode = (props: {
   isFavorited: boolean;
   file: string;
   currentEpisode: string | null;
-  seasonImage: string;
+  seasonImage: string | null;
 }) => {
   // Global state for username. This gets set when the user logs in.
   const { globalUserName } = useContext(UserNameContext);
@@ -33,9 +33,10 @@ const Episode = (props: {
   // filled red to indicate to the user that this episode is favorited
   const [isFavorited, setIsFavorited] = useState(props.isFavorited);
 
-  const audio = new Audio(props.file);
+  // const audio = new Audio(props.file);
 
-  const { setAudioInfo } = useContext(AudioContext) as IAudioContext;
+  const audioContext = useContext(AudioContext);
+  const { setAudioInfo } = audioContext || {};
 
   // Function to handle the event for when the play button is clicked.
   const handlePlayClick = () => {
@@ -45,11 +46,13 @@ const Episode = (props: {
     // } else {
     //   audio.pause();
     // }
-    setAudioInfo({
-      audioLink: props.file,
-      episodeName: props.title,
-      seasonImage: props.seasonImage,
-    });
+    if (props.seasonImage && setAudioInfo !== undefined) {
+      setAudioInfo({
+        audioLink: props.file,
+        episodeName: props.title,
+        seasonImage: props.seasonImage,
+      });
+    }
   };
 
   useEffect(() => {}, [props.isFavorited]);

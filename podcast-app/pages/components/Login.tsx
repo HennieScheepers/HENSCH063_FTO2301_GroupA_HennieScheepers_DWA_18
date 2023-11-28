@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, useEffect, useContext } from "react";
-import supabase from "../config/supabaseClient";
+import supabase from "../../public/config/supabaseClient";
 import { UserNameContext } from "../index";
 
 const Login = (props: {
