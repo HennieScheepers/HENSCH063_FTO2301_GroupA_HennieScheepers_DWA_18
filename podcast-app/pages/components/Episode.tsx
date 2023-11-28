@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from "react";
 import { UserNameContext } from "../index";
 import supabase from "../../public/config/supabaseClient";
 import { FavoritesContext } from "../index";
-import { IAudioContext, RerenderContext } from "./Main";
+import { RerenderContext } from "./Main";
 import { AudioContext } from "./Main";
 
 const Episode = (props: {
@@ -91,7 +91,6 @@ const Episode = (props: {
     removeFromFavorites();
     setIsFavorited(false);
     setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
-    console.log("removed");
   };
 
   // Forms part of the handleFavoriteClick. This function will add the new favorite to the favorites

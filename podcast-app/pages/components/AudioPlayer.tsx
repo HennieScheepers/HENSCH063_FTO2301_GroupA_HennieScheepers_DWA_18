@@ -1,8 +1,7 @@
-import { use, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import expandLessIcon from "../../public/icons/expand-less.svg";
 import expandMoreIcon from "../../public/icons/expand-more.svg";
-import closeIcon from "../../public/icons/close.svg";
 
 const AudioPlayer = (props: {
   audioSource: string;
@@ -13,6 +12,7 @@ const AudioPlayer = (props: {
   // Keeps track of the audio source to be loaded into the audio player
   const audio = props.audioSource;
   const [expand, setExpand] = useState(true);
+  const [timeStamp, setTimeStamp] = useState("00:00:00");
   const icon = expand ? expandMoreIcon : expandLessIcon;
 
   const onExpandClick = () => {
@@ -24,7 +24,11 @@ const AudioPlayer = (props: {
   //   props.setAudioInfo({});
   // };
 
-  useEffect(() => {}, [props.episodeName]);
+  const handlePlay = () => {
+    audio;
+  };
+
+  useEffect(() => {}, [props.episodeName, audio]);
   return (
     <>
       <div className="audio--player--container">
@@ -59,6 +63,7 @@ const AudioPlayer = (props: {
               controls
               controlsList="nodownload"
               id="audio-player"
+              src={`${audio}#t=${timeStamp}`}
             >
               <source src={audio} type="audio/mp3" />
             </audio>

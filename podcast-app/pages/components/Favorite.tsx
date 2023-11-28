@@ -50,10 +50,7 @@ const Favorite = (props: {
           </p>
         </div>
       </div>
-      <div className="table--show">
-        {props.show}
-        (Season {props.season})
-      </div>
+      <div className="table--show">Season {props.season}</div>
       <button
         onClick={(event) => handleRemoveClick(event)}
         className="secondary--button table--button"
