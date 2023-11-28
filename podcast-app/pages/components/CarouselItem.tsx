@@ -23,6 +23,7 @@ const CarouselItem = (props: {
               width={250}
               height={250}
               className="carousel--podcast"
+              priority
             ></Image>
           )}
           <p className="podcast--description carousel--description">
