@@ -11,24 +11,26 @@ const AudioPlayer = (props: {
 }) => {
   // Keeps track of the audio source to be loaded into the audio player
   const audio = props.audioSource;
+
+  // Keeps track of the state that determines if the audio player should be expanded or not
   const [expand, setExpand] = useState(true);
-  const [timeStamp, setTimeStamp] = useState("00:00:00");
+
+  // Keeps track of the time stamp for the audio
+  const [timeStamp, setTimeStamp] = useState("00:00:15");
   const icon = expand ? expandMoreIcon : expandLessIcon;
 
   const onExpandClick = () => {
     setExpand((prevValue) => !prevValue);
   };
 
-  // const onCloseClick = () => {
-  //   audio.pause();
-  //   props.setAudioInfo({});
-  // };
-
-  const handlePlay = () => {
-    audio;
+  const onPlay = () => {
+    const audioFile = new Audio(audio);
+    audioFile.play();
   };
 
-  useEffect(() => {}, [props.episodeName, audio]);
+  useEffect(() => {
+    console.log("rerendered");
+  }, [props.episodeName, audio]);
   return (
     <>
       <div className="audio--player--container">
@@ -39,14 +41,6 @@ const AudioPlayer = (props: {
           >
             <Image src={icon} width={20} height={20} alt="expand icon"></Image>
           </button>
-          {/* <button onClick={onCloseClick} className="primary--button">
-            <Image
-              src={closeIcon}
-              width={20}
-              height={20}
-              alt="expand icon"
-            ></Image>
-          </button> */}
         </div>
 
         {expand && (
@@ -64,6 +58,8 @@ const AudioPlayer = (props: {
               controlsList="nodownload"
               id="audio-player"
               src={`${audio}#t=${timeStamp}`}
+              onPlay={onPlay}
+              autoPlay
             >
               <source src={audio} type="audio/mp3" />
             </audio>

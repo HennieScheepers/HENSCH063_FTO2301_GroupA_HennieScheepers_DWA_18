@@ -91,7 +91,7 @@ const Podcast = (props: {
   };
 
   useEffect(() => {
-    if (showID !== undefined) {
+    if (showID) {
       axios
         .get(`https://podcast-api.netlify.app/id/${showID}`)
         .then((response) => {
