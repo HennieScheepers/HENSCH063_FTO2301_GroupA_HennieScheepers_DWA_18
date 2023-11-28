@@ -74,7 +74,7 @@ const UserProfile = (props: { setShowProfileView: MouseEventHandler }) => {
         <div className="table--row table--heading podcast--info sticky">
           <div className="table--episode">Episode</div>
           <div className="table--show">Show(Season)</div>
-          <div className="table--button">Actions</div>
+          <div className="action--text">Actions</div>
         </div>
         {favoritesElements[0] ? (
           favoritesElements

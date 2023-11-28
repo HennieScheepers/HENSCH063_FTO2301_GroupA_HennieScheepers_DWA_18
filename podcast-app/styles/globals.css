@@ -579,6 +579,13 @@ audio::-webkit-media-controls-timeline {
   width: 2vw;
 }
 
+.action--text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2vw;
+}
+
 .sticky {
   position: sticky;
   top: 0;
