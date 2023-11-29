@@ -1,5 +1,17 @@
-import { useRef, useEffect, useState } from "react";
+import { IAudio } from "./Main";
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
 import Image from "next/image";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 import expandLessIcon from "../../public/icons/expand-less.svg";
 import expandMoreIcon from "../../public/icons/expand-more.svg";
 
@@ -7,66 +19,72 @@ const AudioPlayer = (props: {
   audioSource: string;
   imgSrc: string;
   episodeName: string;
+  audioInfo: IAudio;
   setAudioInfo: Function;
 }) => {
-  // Keeps track of the audio source to be loaded into the audio player
-  const audio = props.audioSource;
+  const theme = useTheme();
 
-  // Keeps track of the state that determines if the audio player should be expanded or not
   const [expand, setExpand] = useState(true);
-
-  // Keeps track of the time stamp for the audio
-  const [timeStamp, setTimeStamp] = useState("00:00:15");
   const icon = expand ? expandMoreIcon : expandLessIcon;
 
   const onExpandClick = () => {
     setExpand((prevValue) => !prevValue);
   };
-
-  const onPlay = () => {
-    const audioFile = new Audio(audio);
-    audioFile.play();
-  };
-
-  useEffect(() => {
-    console.log("rerendered");
-  }, [props.episodeName, audio]);
   return (
-    <>
-      <div className="audio--player--container">
-        <div className="button--container">
-          <button
-            onClick={onExpandClick}
-            className="primary--button expand--button"
-          >
-            <Image src={icon} width={20} height={20} alt="expand icon"></Image>
-          </button>
-        </div>
-
-        {expand && (
-          <>
-            <Image
-              src={props.imgSrc}
-              alt="Audio player image"
-              width={50}
-              height={50}
-            />
-            <label htmlFor="audio-player">{props.episodeName}</label>
-            <audio
-              className="audio--player"
-              controls
-              controlsList="nodownload"
-              id="audio-player"
-              src={`${audio}#t=${timeStamp}`}
-              onPlay={onPlay}
-              autoPlay
-            >
-              <source src={audio} type="audio/mp3" />
-            </audio>
-          </>
-        )}
+    <Card sx={{ display: "flex" }} className="audio--player--container">
+      <div className="button--container">
+        <button
+          onClick={onExpandClick}
+          className="primary--button expand--button"
+        >
+          <Image src={icon} width={20} height={20} alt="expand icon"></Image>
+        </button>
       </div>
-    </>
+      {expand && (
+        <CardMedia
+          component="img"
+          sx={{ width: 151 }}
+          image={props.audioInfo.seasonImage}
+          alt="Podcast cover image"
+        />
+      )}
+      {expand && (
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <CardContent sx={{ flex: "1 0 auto" }}>
+            <Typography component="div" variant="h6">
+              {props.episodeName}
+            </Typography>
+          </CardContent>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              pl: 1,
+              pb: 1,
+              justifyContent: "center",
+            }}
+          >
+            <IconButton aria-label="previous">
+              {theme.direction === "rtl" ? (
+                <SkipNextIcon />
+              ) : (
+                <SkipPreviousIcon />
+              )}
+            </IconButton>
+            <IconButton aria-label="play/pause">
+              <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+            </IconButton>
+            <IconButton aria-label="next">
+              {theme.direction === "rtl" ? (
+                <SkipPreviousIcon />
+              ) : (
+                <SkipNextIcon />
+              )}
+            </IconButton>
+          </Box>
+        </Box>
+      )}
+    </Card>
   );
 };
 

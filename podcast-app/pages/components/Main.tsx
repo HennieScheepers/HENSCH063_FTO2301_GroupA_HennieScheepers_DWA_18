@@ -22,7 +22,7 @@ export const RerenderContext = createContext<Rerender>({
   setRerender: () => {},
 });
 
-interface IAudio {
+export interface IAudio {
   audioLink: string;
   episodeName: string;
   seasonImage: string;
@@ -223,6 +223,7 @@ const Main = () => {
               audioSource={audioInfo.audioLink}
               imgSrc={audioInfo.seasonImage}
               episodeName={audioInfo.episodeName}
+              audioInfo={audioInfo}
               setAudioInfo={setAudioInfo}
             />
           )}

@@ -2,6 +2,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState, useContext, useEffect } from "react";
+
 import { UserNameContext } from "../index";
 import supabase from "../../public/config/supabaseClient";
 import { FavoritesContext } from "../index";
