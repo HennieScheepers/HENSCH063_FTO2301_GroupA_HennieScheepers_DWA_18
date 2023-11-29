@@ -51,8 +51,10 @@ const AudioPlayer = (props: {
             <Image
               src={props.imgSrc}
               alt="Audio player image"
-              width={50}
-              height={50}
+              width={100}
+              height={100}
+              className="audio--player--image"
+              priority
             />
             <label htmlFor="audio-player">{props.episodeName}</label>
             <audio

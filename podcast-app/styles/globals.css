@@ -423,7 +423,14 @@ p {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background-color: transparent;
+  background-color: rgb(255, 255, 255);
+}
+
+.audio--player--image {
+  border-radius: 5px;
+  width: 5vw;
+  height: 5vw;
+  margin-bottom: 2vh;
 }
 
 .expand--button {
