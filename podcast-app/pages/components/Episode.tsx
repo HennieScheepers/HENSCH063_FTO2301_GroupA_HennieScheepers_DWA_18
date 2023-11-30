@@ -35,18 +35,11 @@ const Episode = (props: {
   const [isFavorited, setIsFavorited] = useState(props.isFavorited);
 
   // const audio = new Audio(props.file);
-
   const audioContext = useContext(AudioContext);
   const { setAudioInfo } = audioContext || {};
 
   // Function to handle the event for when the play button is clicked.
   const handlePlayClick = () => {
-    // if (props.currentEpisode !== props.title) {
-    //   props.setAudioSource(props.file);
-    //   props.setCurrentEpisode(props.title);
-    // } else {
-    //   audio.pause();
-    // }
     if (props.seasonImage && setAudioInfo !== undefined) {
       setAudioInfo({
         audioLink: props.file,

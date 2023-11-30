@@ -33,7 +33,7 @@ export interface IAudioContext {
   setAudioInfo: React.Dispatch<React.SetStateAction<IAudio>>;
 }
 
-export const AudioContext = createContext<IAudioContext | undefined>(undefined);
+export const AudioContext = createContext<IAudioContext | null>(null);
 
 const Main = () => {
   // Provided to RerenderContext in order to make Main.tsx rerender when the back button in
@@ -77,6 +77,21 @@ const Main = () => {
   const { setGlobalFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
+    const handleBeforeUnload = (event: Event) => {
+      if (audioInfo.audioLink) {
+        event.preventDefault();
+        return event.returnValue;
+      }
+    };
+
+    const lastListened = localStorage.getItem("lastListened")
+      ? JSON.parse(localStorage.getItem("lastListened")!)
+      : {
+          audioLink: null,
+          episodeName: null,
+          seasonImage: null,
+        };
+    setAudioInfo(lastListened as IAudio);
     /**
      * Axios call to API to fetch necessary data and populate the array with the response
      */
@@ -109,7 +124,13 @@ const Main = () => {
     };
 
     getFavorites();
-  }, [globalUserName, setGlobalFavorites, rerender]);
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [globalUserName, setGlobalFavorites, rerender, audioInfo.audioLink]);
 
   // Keeps track of the sort option the user has selected
   const [sort, setSort] = useState("");
@@ -218,15 +239,7 @@ const Main = () => {
             <Sort setSort={setSort} showShowSort={false} />
           </div>
           {apiData[1] !== undefined && podcastElements}
-          {audioInfo.audioLink !== "" && (
-            <AudioPlayer
-              audioSource={audioInfo.audioLink}
-              imgSrc={audioInfo.seasonImage}
-              episodeName={audioInfo.episodeName}
-              audioInfo={audioInfo}
-              setAudioInfo={setAudioInfo}
-            />
-          )}
+          {audioInfo?.audioLink !== "" && <AudioPlayer />}
         </div>
       </AudioContext.Provider>
     </RerenderContext.Provider>
