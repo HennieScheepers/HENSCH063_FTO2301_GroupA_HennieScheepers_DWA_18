@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 import Auth from "./components/Auth";
 import Main from "./components/Main";
 import favicon from "../public/icons/favicon.svg";
+import image from "../public/PodPlay..png";
 
 interface IUserName {
   globalUserName: string;
@@ -41,6 +42,8 @@ export default function Home() {
     <Auth isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
   );
 
+  console.log(image);
+
   return (
     <UserNameContext.Provider
       value={{
@@ -71,10 +74,7 @@ export default function Home() {
           property="og:description"
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
-        <meta
-          property="og:image"
-          content="https://www.canva.com/design/DAF1u3VuKT8/view"
-        />
+        <meta property="og:image" content={image.src} />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta
@@ -89,10 +89,7 @@ export default function Home() {
           property="twitter:description"
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
-        <meta
-          property="twitter:image"
-          content="https://www.canva.com/design/DAF1u3VuKT8/view"
-        />
+        <meta property="twitter:image" content={image.src} />
 
         <div>{displayComponent}</div>
       </FavoritesContext.Provider>
