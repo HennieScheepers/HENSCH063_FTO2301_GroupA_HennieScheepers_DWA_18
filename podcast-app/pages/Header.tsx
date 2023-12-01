@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import accountIcon from "../public/icons/accountIcon.svg";
 import searchIcon from "../public/icons/searchIcon.svg";
 import Image from "next/image";

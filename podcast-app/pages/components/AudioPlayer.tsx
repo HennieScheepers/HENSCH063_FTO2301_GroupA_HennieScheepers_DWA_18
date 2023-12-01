@@ -46,6 +46,8 @@ const AudioPlayer = () => {
           el.currentTime = timeStamp;
         }
       });
+
+      el.onseeking = setTimeStamp(el.currentTime);
     }
 
     audioFile.current.addEventListener("canplaythrough", () => {

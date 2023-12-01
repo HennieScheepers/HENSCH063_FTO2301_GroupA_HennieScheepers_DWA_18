@@ -73,10 +73,7 @@ export default function Home() {
           property="og:description"
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
-        <meta
-          property="og:image"
-          content="https://metatags.io/images/meta-tags.png"
-        />
+        <meta property="og:image" content="public/PodPlay..png" />
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
