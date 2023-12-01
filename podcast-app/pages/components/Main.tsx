@@ -77,10 +77,12 @@ const Main = () => {
   const { setGlobalFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    const handleBeforeUnload = (event: Event) => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (audioInfo.audioLink) {
-        event.preventDefault();
-        return event.returnValue;
+        const confirmationMessage =
+          "Are you sure you want to leave? You seem to be enjoying this podcast.";
+        event.returnValue = confirmationMessage;
+        return confirmationMessage;
       }
     };
 

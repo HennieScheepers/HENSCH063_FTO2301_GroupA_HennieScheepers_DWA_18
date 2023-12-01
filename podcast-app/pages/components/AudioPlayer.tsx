@@ -31,29 +31,38 @@ const AudioPlayer = () => {
   const el = document.querySelector(".audio--player") as HTMLAudioElement;
 
   useEffect(() => {
-    const el = document.querySelector(".audio--player") as HTMLAudioElement;
+    const audioElement = audioFile.current;
 
-    if (el) {
-      el.addEventListener("pause", () => {
-        localStorage.setItem("timeStamp", JSON.stringify(el.currentTime));
-        if (el.currentTime !== timeStamp) {
-          setTimeStamp(el.currentTime);
-        }
-      });
+    // Add event listener for "ended" event
+    audioElement.addEventListener("ended", () => {
+      // Set the time stamp to 0 when the audio has finished playing
+      setTimeStamp(0);
+      setExpand(false);
+    });
 
-      el.addEventListener("play", () => {
-        if (timeStamp !== 0) {
-          el.currentTime = timeStamp;
-        }
-      });
+    // Add event listeners for "pause" and "play" events
+    const handlePause = () => {
+      localStorage.setItem(
+        "timeStamp",
+        JSON.stringify(audioElement.currentTime)
+      );
+      setTimeStamp(audioElement.currentTime);
+    };
 
-      el.onseeking = setTimeStamp(el.currentTime);
-    }
+    const handlePlay = () => {
+      if (timeStamp !== 0) {
+        audioElement.currentTime = timeStamp;
+      }
+    };
 
-    audioFile.current.addEventListener("canplaythrough", () => {
-      if (audioFile.current.paused) {
+    audioElement.addEventListener("pause", handlePause);
+    audioElement.addEventListener("play", handlePlay);
+
+    // Add event listener for "canplaythrough" event
+    audioElement.addEventListener("canplaythrough", () => {
+      if (audioElement.paused) {
         if (timeStamp) {
-          audioFile.current.currentTime = timeStamp;
+          audioElement.currentTime = timeStamp;
         }
       }
 
@@ -67,7 +76,13 @@ const AudioPlayer = () => {
       );
     });
 
-    setTimeStamp(parseFloat(localStorage.getItem("timeStamp") || "0"));
+    // Clean up event listeners when the component unmounts
+    return () => {
+      audioElement.removeEventListener("ended", () => {});
+      audioElement.removeEventListener("pause", handlePause);
+      audioElement.removeEventListener("play", handlePlay);
+      audioElement.removeEventListener("canplaythrough", () => {});
+    };
   }, [audioInfo, episodeName, timeStamp]);
 
   return (

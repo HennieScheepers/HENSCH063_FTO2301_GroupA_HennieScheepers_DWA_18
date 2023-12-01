@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 import Auth from "./components/Auth";
 import Main from "./components/Main";
-import image from "../public/PodPlay..png";
+import image from "../public/PodPlay.png";
 
 interface IUserName {
   globalUserName: string;
