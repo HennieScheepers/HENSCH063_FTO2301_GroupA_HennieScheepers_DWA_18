@@ -74,7 +74,10 @@ export default function Home() {
           property="og:description"
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
-        <meta property="og:image" content={image.src} />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta
@@ -89,7 +92,10 @@ export default function Home() {
           property="twitter:description"
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
-        <meta property="twitter:image" content={image.src} />
+        <meta
+          property="twitter:image"
+          content="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        />
 
         <div>{displayComponent}</div>
       </FavoritesContext.Provider>
