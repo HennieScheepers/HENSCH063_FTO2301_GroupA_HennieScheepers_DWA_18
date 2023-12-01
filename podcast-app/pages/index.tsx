@@ -51,10 +51,6 @@ export default function Home() {
       <FavoritesContext.Provider
         value={{ globalFavorites, setGlobalFavorites }}
       >
-        <link rel="icon" type="image/svg+xml" href={favicon} />
-        <link rel="icon" type="image/png" href={favicon} />
-
-        {/* <!-- Primary Meta Tags --> */}
         <title>Listen to all your favorite podcasts.</title>
         <meta name="title" content="Listen to all your favorite podcasts." />
         <meta
@@ -62,9 +58,11 @@ export default function Home() {
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
 
-        {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
+        <meta
+          property="og:url"
+          content="https://zesty-speculoos-58258f.netlify.app/"
+        />
         <meta
           property="og:title"
           content="Listen to all your favorite podcasts."
@@ -73,11 +71,16 @@ export default function Home() {
           property="og:description"
           content="PODPLAY is a podcast platform where you can listen to all of your podcasts on demand!"
         />
-        <meta property="og:image" content="public/PodPlay..png" />
+        <meta
+          property="og:image"
+          content="https://metatags.io/images/meta-tags.png"
+        />
 
-        {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta
+          property="twitter:url"
+          content="https://zesty-speculoos-58258f.netlify.app/"
+        />
         <meta
           property="twitter:title"
           content="Listen to all your favorite podcasts."
