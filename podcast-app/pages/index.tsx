@@ -73,7 +73,7 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://www.canva.com/design/DAF1u3VuKT8/view"
         />
 
         <meta property="twitter:card" content="summary_large_image" />
@@ -91,7 +91,7 @@ export default function Home() {
         />
         <meta
           property="twitter:image"
-          content="https://metatags.io/images/meta-tags.png"
+          content="https://www.canva.com/design/DAF1u3VuKT8/view"
         />
 
         <div>{displayComponent}</div>
