@@ -1,7 +1,6 @@
 import { useState, createContext } from "react";
 import Auth from "./components/Auth";
 import Main from "./components/Main";
-import favicon from "../public/icons/favicon.svg";
 import image from "../public/PodPlay..png";
 
 interface IUserName {
