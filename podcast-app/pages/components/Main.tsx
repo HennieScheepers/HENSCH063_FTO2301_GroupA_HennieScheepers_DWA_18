@@ -86,6 +86,9 @@ const Main = () => {
       }
     };
 
+    // Attach the event handler
+    window.onbeforeunload = handleBeforeUnload;
+
     const lastListened = localStorage.getItem("lastListened")
       ? JSON.parse(localStorage.getItem("lastListened")!)
       : {

@@ -76,6 +76,14 @@ const AudioPlayer = () => {
       );
     });
 
+    // Reset timestamp and audio state when a new audio link is received
+    if (audioInfo?.audioInfo.audioLink !== audioElement.src) {
+      setTimeStamp(0);
+      setExpand(true); // Assuming you want to expand the player when a new audio is loaded
+      audioElement.src = audioInfo?.audioInfo.audioLink || "";
+      audioElement.load();
+    }
+
     // Clean up event listeners when the component unmounts
     return () => {
       audioElement.removeEventListener("ended", () => {});
