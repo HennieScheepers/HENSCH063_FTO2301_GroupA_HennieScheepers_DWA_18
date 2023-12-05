@@ -17,6 +17,7 @@ const Header = (props: { setSearchFilter: Function; searchFilter: string }) => {
   // boolean value that determines if userProfile is to be displayed
   const [showUserProfile, setShowUserProfile] = useState(false);
 
+  // Event handler that sets the showUserProfile value when the profile icon is clicked
   const handleProfileClick = () => {
     setShowUserProfile((prevValue) => !prevValue);
   };

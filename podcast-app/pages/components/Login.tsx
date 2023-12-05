@@ -20,21 +20,21 @@ const Login = (props: {
 
   const { globalUserName, setGlobalUsername } = useContext(UserNameContext);
 
-  // Handles the onChange event for the username and sets it's new state accordingly
+  // Handles the "onChange" event for the username and sets it's new state accordingly
   const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     setUsername(value);
   };
 
-  // Handles the onChange event for the password and sets it's new state
+  // Handles the "onChange" event for the password and sets it's new state
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     setPassword(value);
   };
 
-  // Handles the event for the sign up button click. This sets loginOrSignup to tell react what page
+  // Handles the event for the sign up button "click". This sets loginOrSignup to tell react what page
   // to display
   const handleSignUpClick = () => {
     props.setLoginOrSignUp("signup");

@@ -6,41 +6,39 @@ import { AudioContext } from "./Main";
 
 const AudioPlayer = () => {
   const audioInfo = useContext(AudioContext);
-  console.log("audioInfo episode: ", audioInfo?.audioInfo.episodeName);
 
   // Keeps track of the audio source to be loaded into the audio player
   const audioFile = useRef(new Audio(audioInfo?.audioInfo.audioLink));
-  console.log(audioFile);
   const seasonImage = audioInfo?.audioInfo.seasonImage;
   const episodeName = audioInfo?.audioInfo.episodeName;
 
   // Keeps track of the state that determines if the audio player should be expanded or not
   const [expand, setExpand] = useState(true);
+  // Assigns the appropriate source to "icon" depending on "expand" value
   const icon = expand ? expandMoreIcon : expandLessIcon;
 
+  // The default timestamp whih is 0
   const initialTimestamp = localStorage.getItem("timeStamp")
     ? parseFloat(localStorage.getItem("timeStamp")!)
     : 0;
   const [timeStamp, setTimeStamp] = useState<number>(initialTimestamp);
-  console.log(timeStamp);
 
+  // An eevent listener that triggers when the user clicks on the expand button
   const onExpandClick = () => {
     setExpand((prevValue) => !prevValue);
   };
 
-  const el = document.querySelector(".audio--player") as HTMLAudioElement;
-
   useEffect(() => {
     const audioElement = audioFile.current;
 
-    // Add event listener for "ended" event
+    // Event listener for the "ended" event on the audio player
     audioElement.addEventListener("ended", () => {
       // Set the time stamp to 0 when the audio has finished playing
       setTimeStamp(0);
       setExpand(false);
     });
 
-    // Add event listeners for "pause" and "play" events
+    // Event handlers fo the "pause" event on the audio player
     const handlePause = () => {
       localStorage.setItem(
         "timeStamp",
@@ -49,6 +47,7 @@ const AudioPlayer = () => {
       setTimeStamp(audioElement.currentTime);
     };
 
+    // Event handler for the "play" event on the audio player
     const handlePlay = () => {
       if (timeStamp !== 0) {
         audioElement.currentTime = timeStamp;
@@ -58,7 +57,7 @@ const AudioPlayer = () => {
     audioElement.addEventListener("pause", handlePause);
     audioElement.addEventListener("play", handlePlay);
 
-    // Add event listener for "canplaythrough" event
+    // Event listener for the "canplaythrough event handlers"
     audioElement.addEventListener("canplaythrough", () => {
       if (audioElement.paused) {
         if (timeStamp) {
@@ -66,6 +65,7 @@ const AudioPlayer = () => {
         }
       }
 
+      // Stroring the last listened to episode to local storage
       localStorage.setItem(
         "lastListened",
         JSON.stringify({
@@ -79,12 +79,12 @@ const AudioPlayer = () => {
     // Reset timestamp and audio state when a new audio link is received
     if (audioInfo?.audioInfo.audioLink !== audioElement.src) {
       setTimeStamp(0);
-      setExpand(true); // Assuming you want to expand the player when a new audio is loaded
+      setExpand(true);
       audioElement.src = audioInfo?.audioInfo.audioLink || "";
       audioElement.load();
     }
 
-    // Clean up event listeners when the component unmounts
+    // Clean up event listeners when the component unmounts. Done mainly to avoid memory leaks
     return () => {
       audioElement.removeEventListener("ended", () => {});
       audioElement.removeEventListener("pause", handlePause);

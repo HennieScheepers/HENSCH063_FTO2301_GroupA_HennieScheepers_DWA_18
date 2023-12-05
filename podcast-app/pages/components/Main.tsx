@@ -68,15 +68,14 @@ const Main = () => {
     },
   ]);
 
-  /**
-   * Keps track of the value entered into the search bar by the user. Used in a filter function
-   * to disply only the podcasts which titles or genres container the search value
-   */
+  // Keeps track of the value entered into the search bar by the user. Used in a filter function
+  // to disply only the podcasts which titles or genres container the search value
   const [searchFilter, setSearchFilter] = useState("");
   const { globalUserName } = useContext(UserNameContext);
   const { setGlobalFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
+    // Event handler to run when the user closes the window
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (audioInfo.audioLink) {
         const confirmationMessage =
@@ -85,10 +84,10 @@ const Main = () => {
         return confirmationMessage;
       }
     };
-
-    // Attach the event handler
+    // Add event handler to window
     window.onbeforeunload = handleBeforeUnload;
 
+    // Store the lastListened to episode after it is fetched from the local storage
     const lastListened = localStorage.getItem("lastListened")
       ? JSON.parse(localStorage.getItem("lastListened")!)
       : {
@@ -97,9 +96,8 @@ const Main = () => {
           seasonImage: null,
         };
     setAudioInfo(lastListened as IAudio);
-    /**
-     * Axios call to API to fetch necessary data and populate the array with the response
-     */
+
+    // Axios call to API to fetch necessary data and populate the array with the response
     axios
       .get("https://podcast-api.netlify.app/shows")
       .then((res) => {
@@ -112,6 +110,7 @@ const Main = () => {
         )
       );
 
+    // Gets the favorites and stores them in the the globalFavorites state
     const getFavorites = async () => {
       const { data, error } = await supabase
         .from("favorite")
@@ -139,6 +138,7 @@ const Main = () => {
 
   // Keeps track of the sort option the user has selected
   const [sort, setSort] = useState("");
+
   // function that handles the sorting of the podcasts.
   const handleDataSort = () => {
     switch (sort) {
@@ -162,6 +162,7 @@ const Main = () => {
   // Keeps track of the genre filter
   const [genreFilter, setGenreFilter] = useState("");
 
+  // Gets passed down to the "Podcast" component to set the genre from there
   const handleGenreFilterChange = (genre: string) => {
     setGenreFilter(genre);
   };

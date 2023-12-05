@@ -36,7 +36,7 @@ const DetailedPodcast = (props: {
     </MenuItem>
   ));
 
-  // Event handler for the back button. This will take the user back to the Main.tsx component and
+  // Event handler for the back button "click". This will take the user back to the Main component and
   // also rerender it to get the new set of user favorites
   const handleBackClick = () => {
     setRerender((prevState: boolean) => !prevState);

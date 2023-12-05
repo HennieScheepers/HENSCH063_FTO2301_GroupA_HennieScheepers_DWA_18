@@ -13,7 +13,7 @@ export const UserNameContext = createContext<IUserName>({
   setGlobalUsername: () => {},
 });
 
-interface IFavorite {
+export interface IFavorite {
   show: string;
   episodes: string;
   id: number;

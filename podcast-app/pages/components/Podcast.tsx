@@ -59,10 +59,13 @@ const Podcast = (props: {
     updated: "",
   });
 
+  // Keep track of the genres in string form
   const [genreString, setGenreString] = useState("");
 
+  // Change the genre into an array in order to create the genre buttons
   const genresArray = genreString.split(",");
 
+  // Event listener to update the current genre filter when a genre button is clicked
   const handleGenreClick = (genre: string) => {
     props.setGenreFilter(genre);
   };

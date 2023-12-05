@@ -124,7 +124,6 @@ const Episode = (props: {
   const handleFavoriteClick = () => {
     addToFavorites();
     setIsFavorited(true);
-    console.log("added");
     setTimeout(() => setRerender((prevValue: boolean) => !prevValue), 100);
   };
 

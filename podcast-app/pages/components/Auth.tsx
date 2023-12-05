@@ -4,6 +4,7 @@ import SignUp from "./SignUp";
 const Auth = (props: { isLoggedIn: boolean; setLoggedIn: Function }) => {
   const [loginOrSignup, setLoginOrSignUp] = useState("login");
 
+  // Decides which component to display (Login or Signup)
   const displayComponent =
     loginOrSignup === "login" ? (
       <Login

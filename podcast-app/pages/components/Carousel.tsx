@@ -8,6 +8,7 @@ export interface IPodcast {
 }
 
 const Carousel = (props: { arrayOfPodcasts: IPodcast[] }) => {
+  // Keeps track of the current counter value
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
@@ -18,9 +19,6 @@ const Carousel = (props: { arrayOfPodcasts: IPodcast[] }) => {
         setCounter((prevCounter) => (prevCounter + 1) % 4);
       }
     }, 4000);
-
-    // Cleanup the timeout to avoid memory leaks
-    return () => clearTimeout(timeoutId);
   }, [counter]);
 
   const carouselElements = props.arrayOfPodcasts?.map((podcast, index) => (
